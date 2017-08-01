@@ -1,4 +1,6 @@
-package ch08oodesign; /**
+package ch08oodesign;
+
+/**
  * 8.9 메모리 상주형 파일 시스템을 구현하기 위한 자료구와 알고리즘에 대해 설명해 보라.
  *    가능하다면 코드 예제를 들어 설명하도록 하라.
  * --> Entry, File, Directory 관계를 생각하면 in-memory fs 쉽게 생성 가능
@@ -23,105 +25,7 @@ package ch08oodesign; /**
  * 
  * 디렉토리가 파일과 디렉토리를 하나의 리스트로 관리 또는 분리 관리 여부는 여러가지 장단점으로 선택 가능.
  */
-abstract class Entry {
-    protected String name;
-    protected Directory parent;
 
-    protected long created;
-    protected long lastUpdated;
-    protected long lastAccessed;
 
-    public Entry(String name, Directory parent) {
-        this.name = name;
-        this.parent = parent;
-        created = System.currentTimeMillis();
-    }
+public class OODesign09 {}
 
-    public abstract int size();
-
-    public boolean delete() {
-        if (parent == null) {
-            return false;
-        }
-
-        return parent.deleteEntry(this);
-    }
-
-    public String getFullPath() {
-        if (parent == null) {
-            return name;
-        } else {
-            return parent.getFullPath() + "/" + name;
-        }
-    }
-}
-
-class File extends Entry {
-    private int size;
-    private String content;
-
-    public File(String name, Directory parent, int size) {
-        super(name, parent);
-        this.size = size;
-    }
-
-    @Override
-    public int size() {
-        return size;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String c) {
-        content = c;
-    }
-}
-
-class Directory extends Entry {
-    private ArrayList<Entry> entries;
-    // private ArrayList<Entry> files;
-    // private ArrayList<Entry> directories;
-
-    public Directory(String name, Directory parent) {
-        super(name, parent);
-        entries = new ArrayList<Entry>();
-    }
-
-    public ArrayList<Entry> getEntries() {
-        return entries;
-    }
-
-    public void addEntry(Entry e) {
-        entries.add(e);
-    }
-
-    public boolean deleteEntry(Entry e) {
-        return entries.remove(e);
-    }
-
-    public int size() {
-        int size = 0;
-        for (Entry e : entries) {
-            size += e.size();
-        }
-
-        return size;
-    }
-
-    public int numberOfFiles() {
-        int count = 0;
-        
-        for (Entry e : entries) {
-            if (e instanceof File) {
-                count++;
-            } else if (e instanceof Directory) {
-                count++;
-                count += ((Directory)e).numberOfFiles();
-            }
-        }
-
-        return count;
-    }
-}

@@ -2,9 +2,9 @@ package ch08oodesign.callcenter;
 
 
 public abstract class Employee {
-    private CallHandler callCenter;
+    private CallCenter callCenter;
 
-    public Employee(CallHandler center) {
+    public Employee(CallCenter center) {
         callCenter = center;
     }
 }

@@ -106,4 +106,9 @@ public class AssortedMethods {
 
         return sb.toString();
     }
+
+    //TODO:
+    public static TreeNode createTreeFromArray(int[] arr) {
+        return null;
+    }
 }

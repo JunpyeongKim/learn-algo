@@ -10,20 +10,5 @@ package ch08oodesign;
  * 7.3 Jukebox: Design a musical jukebox using object-oriented principles.
  */
 
-// CD, LP, Table, etc
-public class CDPlayer {}
 
-public class CD {}
-
-public class Song {}
-
-public class Playlist {}
-
-// 
-public class User {}
-
-//
-public class SongSelector {}
-
-//
-public class JukeBox {}
+public class OODesign03 {}

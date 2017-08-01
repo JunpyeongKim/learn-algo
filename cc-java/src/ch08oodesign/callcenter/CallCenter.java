@@ -3,8 +3,8 @@ package ch08oodesign.callcenter;
 import java.util.ArrayList;
 import java.util.List;
 
-// Entry Point: CallHandler
-public class CallHandler {
+// Entry Point: CallCenter
+public class CallCenter {
     private final int LEVELS = 3;
 
     private final int NUM_RESPONDENTS = 10;
@@ -14,7 +14,7 @@ public class CallHandler {
     List<List<Employee>> employeeLevels;
     List<List<Call>> callQueues;
 
-    public CallHandler() {
+    public CallCenter() {
         employeeLevels = new ArrayList<List<Employee>>(LEVELS);
         callQueues = new ArrayList<List<Call>>(LEVELS);
 
