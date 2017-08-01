@@ -35,6 +35,9 @@ public class TreeGraph02 {
      *      - breadth-first search : useful to find the shortest path
      */
 
+
+    //--------------------------------------------------------------------------------
+    // Solution
     //--------------------------------------------------------------------------------
     public static boolean search(Graph g, Node start, Node end) {
         if (start == end) {
