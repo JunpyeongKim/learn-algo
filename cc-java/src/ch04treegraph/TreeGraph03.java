@@ -14,11 +14,11 @@ import lib.TreeNode;
  *                   write an algorithm to create a binary search tree with minimal height.
  *
  *     Hints #19. A minimal binary tree has about the same number of nodes on the left of each nodes as on the right.
- *                let's forcus on just the root for now.
+ *                let's focus on just the root for now.
  *                How would you ensure that about the same number of nodes are on the left of the root as on the right?
  *     Hints #73. You could implement this by finding the "ideal" next element to add and repeatedly calling insertValue.
  *                This will be a bit inefficient, as you would have to repeatedly traverse the tree.
- *                Can you divide this problem into subproblem?
+ *                Can you divide this problem into subproblems?
  *     Hints #116. Imagine we had a createMinimalTree method that returns a minimal tree for a given array
  *                 (but for some strange reason doesn't operate on the root of the tree).
  *                 Could you use this to operate on the root of the tree?
@@ -30,7 +30,7 @@ public class TreeGraph03 {
             return null;
         }
 
-        int mid = (start + end) / 2;
+        int mid = (start + end) / 2;    // median
         TreeNode node = new TreeNode(array[mid]);
 
         node.left = createMinimalBST(array, start, mid - 1);
@@ -44,11 +44,14 @@ public class TreeGraph03 {
     }
 
 
+    //--------------------------------------------------------------------------------
     // Main
+    //--------------------------------------------------------------------------------
     public static void main(String[] args) {
         int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
         TreeNode root = createMinimalBST(array);
+
         System.out.println("Root? " + root.data);
         System.out.println("Created BST? " + root.isBST());
         System.out.println("Height: " + root.height());
