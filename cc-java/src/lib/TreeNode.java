@@ -79,7 +79,7 @@ public class TreeNode {
         int mid = (start + end) / 2;
 
         TreeNode n = new TreeNode(array[mid]);
-        n.setLeftNode(createMinimalBST(array, 0, mid - 1));
+        n.setLeftNode(createMinimalBST(array, start, mid - 1));
         n.setRightNode(createMinimalBST(array, mid + 1, end));
 
         return n;
