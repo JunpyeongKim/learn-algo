@@ -26,6 +26,7 @@ import lib.TreeNode;
  *                         Could you use this to operate on the root of the tree?
  *                         Could you write the base case for the function? Great! Then that's basically the entire function.
  */
+
 public class TreeGraph03 {
     private static TreeNode createMinimalBST(int[] array, int start, int end) {
         if (start > end) {

@@ -74,7 +74,7 @@ package ch04treegraph;
  *                         Could you write the base case for the function? Great! Then that's basically the entire function.
  */
 
-// WIP 4
+// DONE 4 (2017.08.02)
 /**
  * 4.4 주어진 이진 트리에서 깊이별로 연결 리스트를 만들어 내는 알고리즘을 작성하라.
  *     (트리의 깊이가 D라면, 알고리즘 수행 결과로 D개의 연결 리스트가 만들어져야 한다.)
@@ -162,7 +162,8 @@ package ch04treegraph;
 
 
 //--------------------------------------------------------------------------------
-// English Edition: Unsolved --> 4E(3,4,5, 6,7, 8), 6E(2,3,5, 6, 7, 8, 9, 11, 12)
+// English Edition: Unsolved --> 4E(5, 6,7, 8), 6E(5, 6, 7, 8, 9, 11, 12)
 //--------------------------------------------------------------------------------
+
 public class TreeGraph {
 }
