@@ -116,8 +116,8 @@ public class TreeGraph01 {
         int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         TreeNode root = TreeNode.createMinimalBST(array);
 
-        System.out.println("Root(" + root.data + ") is ");
-        System.out.println("\tbalanced? BruteForce(" + isBalancedBruteForce(root) + "), Improved(" + isBalancedImproved(root) + ")");
+        System.out.println("Root(" + root.data + ") is balanced?");
+        System.out.println("\tBruteForce(" + isBalancedBruteForce(root) + "), Improved(" + isBalancedImproved(root) + ")");
 
 
         //--------------------------------------------------------------------------------
@@ -128,7 +128,7 @@ public class TreeGraph01 {
             unbalanced.insertInOrder(AssortedMethods.randomIntInRange(0, 100));
         }
 
-        System.out.println("Root(" + unbalanced.data + ") is");
-        System.out.println("\tbalanced? BruteForce(" + isBalancedBruteForce(unbalanced) + "), Improved(" + isBalancedImproved(unbalanced) + ")");
+        System.out.println("Root(" + unbalanced.data + ") is balanced?");
+        System.out.println("\tBruteForce(" + isBalancedBruteForce(unbalanced) + "), Improved(" + isBalancedImproved(unbalanced) + ")");
     }
 }
