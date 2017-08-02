@@ -7,15 +7,29 @@ package ch04treegraph;
  *
  * (4E)
  * 4.1 Implement a function to check if a tree is balanced.
- *     For the purposes of this question, a balanced tree is defined to be a tree
- *     such that no two leaf nodes differ in distance from the root by more than one.
+ *     For the purposes of this question, a balanced tree is defined to be a tree such that
+ *     no two leaf nodes differ in distance from the root by more than one.
  *
  * (6E)
  * 4.4 Check Balanced: Implement a function to check if a binary tree is balanced.
- *                     For the purposes of this question, a balanced tree is defined to be a tree
- *                     such that the heights of the two subtrees of any node never differ by more than one.
+ *                     For the purposes of this question, a balanced tree is defined to be a tree such that
+ *                     the heights of the two subtrees of any node never differ by more than one.
  *
- *                     Hints: #21, #33, #49, #105, #124
+ *                     Hints
+ *                     #21. Think about the definition of a balanced tree.
+ *                          Can you check that condition for a single node?
+ *                          Can you check it for every node?
+ *                     #33. If you've developed a brute force solution, be careful about its runtime.
+ *                          If you are computing the height of the subtrees for each node,
+ *                          you could have a pretty inefficient algorithm.
+ *                     #49. What if you could modify the binary tree node class
+ *                          to allow a node to store the height of its subtree?
+ *                     #105. You don't need to modify the binary tree class to store the height of the subtree.
+ *                           Can your recursive function compute the height of each subtree
+ *                           while also checking if a node is balanced?
+ *                     #124. Actually, you can just have a single checkHeight function that does
+ *                           both the height computation and the balance check.
+ *                           An integer return value can be used to indicate both.
  */
 
 // DONE 2 (2017.07.31)
@@ -23,40 +37,44 @@ package ch04treegraph;
  * 4.2 주어진 유향 그래프(directed graph)에서 특정한 두 노드 간에 경로(route)가 존재하는지를 판별하는 알고리즘을 구현하라.
  *
  * (4E)
- * 4.2 Given a directed graph, design an algorithm to find out whether there is a route between two nodes.
+ * 4.2 Given a directed graph,
+ *     design an algorithm to find out whether there is a route between two nodes.
  *
  * (6E)
  * 4.1 Route Between Nodes: Given a directed graph,
  *                          design an algorithm to find out whether there is a route between two nodes.
  *
- *                          Hints #127. Two well-known algorithms can do this. What are the tradeoffs between them?
+ *                          Hints
+ *                          #127. Two well-known algorithms can do this. What are the tradeoffs between them?
  */
 
-// Done 3
+// DONE 3 (2017.08.02)
 /**
  * 4.3 오름차순으로 정렬된 배열로부터 그 높이가 가장 낮은 이진 탐색 트리를 생성하는 알고리즘을 작성하라.
  *     배열 내 모든 원소는 배열 내에서 유일한 값을 갖는다.
  *
- * (5E)
- * 4.3 Given a sorted(increasing order) array, write an algorithm to create a binary tree with minimal height.
+ * (4E)
+ * 4.3 Given a sorted(increasing order) array,
+ *     write an algorithm to create a binary tree with minimal height.
  *
  * (6E)
  * 4.2 Minimal Tree: Given a sorted (increasing order) array with unique integer elements,
  *                   write an algorithm to create a binary search tree with minimal height.
  *
- *     Hints #19. A minimal binary tree has about the same number of nodes on the left of each nodes as on the right.
- *                let's forcus on just the root for now.
- *                How would you ensure that about the same number of nodes are on the left of the root as on the right?
- *     Hints #73. You could implement this by finding the "ideal" next element to add and repeatedly calling insertValue.
- *                This will be a bit inefficient, as you would have to repeatedly traverse the tree.
- *                Can you divide this problem into subproblem?
- *     Hints #116. Imagine we had a createMinimalTree method that returns a minimal tree for a given array
- *                 (but for some strange reason doesn't operate on the root of the tree).
- *                 Could you use this to operate on the root of the tree?
- *                 Could you write the base case for the function? Great! Then that's basically the entire function.
+ *                   Hints:
+ *                   #19. A minimal binary tree has about the same number of nodes on the left of each nodes as on the right.
+ *                        let's focus on just the root for now.
+ *                        How would you ensure that about the same number of nodes are on the left of the root as on the right?
+ *                   #73. You could implement this by finding the "ideal" next element to add and repeatedly calling insertValue.
+ *                        This will be a bit inefficient, as you would have to repeatedly traverse the tree.
+ *                        Can you divide this problem into subproblems?
+ *                   #116. Imagine we had a createMinimalTree method that returns a minimal tree for a given array
+ *                         (but for some strange reason doesn't operate on the root of the tree).
+ *                         Could you use this to operate on the root of the tree?
+ *                         Could you write the base case for the function? Great! Then that's basically the entire function.
  */
 
-// Done 4
+// WIP 4
 /**
  * 4.4 주어진 이진 트리에서 깊이별로 연결 리스트를 만들어 내는 알고리즘을 작성하라.
  *     (트리의 깊이가 D라면, 알고리즘 수행 결과로 D개의 연결 리스트가 만들어져야 한다.)
@@ -70,7 +88,10 @@ package ch04treegraph;
  *                     design an algorithm which creates a linked list of all the nodes at each depth
  *                     (e.g., if you have a tree with depth D, you'll have D linked lists).
  *
- *                     Hints: #107, #123, #135
+ *                     Hints:
+ *                     #107. Try modifying a graph search algorithm to track the depth from the root.
+ *                     #123. A hash table or array that maps from level number to nodes at that level might also be useful.
+ *                     #135. You should be able to come up with an algorithm involving both depth-first search and breadth-first search.
  */
 
 // WIP 7

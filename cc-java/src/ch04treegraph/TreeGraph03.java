@@ -6,23 +6,25 @@ import lib.TreeNode;
  * 4.3 오름차순으로 정렬된 배열로부터 그 높이가 가장 낮은 이진 탐색 트리를 생성하는 알고리즘을 작성하라.
  *     배열 내 모든 원소는 배열 내에서 유일한 값을 갖는다.
  *
- * (5E)
- * 4.3 Given a sorted(increasing order) array, write an algorithm to create a binary tree with minimal height.
+ * (4E)
+ * 4.3 Given a sorted(increasing order) array,
+ *     write an algorithm to create a binary tree with minimal height.
  *
  * (6E)
  * 4.2 Minimal Tree: Given a sorted (increasing order) array with unique integer elements,
  *                   write an algorithm to create a binary search tree with minimal height.
  *
- *     Hints #19. A minimal binary tree has about the same number of nodes on the left of each nodes as on the right.
- *                let's focus on just the root for now.
- *                How would you ensure that about the same number of nodes are on the left of the root as on the right?
- *     Hints #73. You could implement this by finding the "ideal" next element to add and repeatedly calling insertValue.
- *                This will be a bit inefficient, as you would have to repeatedly traverse the tree.
- *                Can you divide this problem into subproblems?
- *     Hints #116. Imagine we had a createMinimalTree method that returns a minimal tree for a given array
- *                 (but for some strange reason doesn't operate on the root of the tree).
- *                 Could you use this to operate on the root of the tree?
- *                 Could you write the base case for the function? Great! Then that's basically the entire function.
+ *                   Hints:
+ *                   #19. A minimal binary tree has about the same number of nodes on the left of each nodes as on the right.
+ *                        let's focus on just the root for now.
+ *                        How would you ensure that about the same number of nodes are on the left of the root as on the right?
+ *                   #73. You could implement this by finding the "ideal" next element to add and repeatedly calling insertValue.
+ *                        This will be a bit inefficient, as you would have to repeatedly traverse the tree.
+ *                        Can you divide this problem into subproblems?
+ *                   #116. Imagine we had a createMinimalTree method that returns a minimal tree for a given array
+ *                         (but for some strange reason doesn't operate on the root of the tree).
+ *                         Could you use this to operate on the root of the tree?
+ *                         Could you write the base case for the function? Great! Then that's basically the entire function.
  */
 public class TreeGraph03 {
     private static TreeNode createMinimalBST(int[] array, int start, int end) {
