@@ -28,6 +28,27 @@ import lib.TreeNode;
  */
 
 public class TreeGraph03 {
+    /**
+     * we need to match the number of nodes in the left subtree to the number of nodes in the right subtree as much as possible.
+     *  - we want the root to be the middle of the array.
+     *  - half the elements would be less than the root and half would be greater than it.
+     *
+     * The middle of each subsection of the array becomes the root of the node.
+     *  - The left half of the array will become our left subtree,
+     *  - and the right half of the array will become our right subtree.
+     *
+     * One way to implement this: root.insertNode(int v)
+     *  - inserts the value through a recursive process --> not so very efficiently.
+     *  - O(N logN) time
+     *
+     * Alternatively, createMinimalBST()
+     *  - a subsection of the array is passed.
+     *  - returns the root of a minimal tree for that array
+     */
+
+    //--------------------------------------------------------------------------------
+    // Solution
+    //--------------------------------------------------------------------------------
     private static TreeNode createMinimalBST(int[] array, int start, int end) {
         if (start > end) {
             return null;
