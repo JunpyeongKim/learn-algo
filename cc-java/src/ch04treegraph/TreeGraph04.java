@@ -26,24 +26,38 @@ import java.util.LinkedList;
  */
 
 public class TreeGraph04 {
+    /**
+     * at first glance, requires a level-by-level traversal. --> actually not necessary.
+     * ==> We can traverse the graph any way that we'd like.
+     *
+     * O(N) space: both solutions require returning O(N) data.
+     */
+
+
     //--------------------------------------------------------------------------------
     // Solution #1. Breadth First Search (a.k.a Level-order traversal)
+    //              - O(N) time
+    //              - O(N) space
     //--------------------------------------------------------------------------------
     public static ArrayList<LinkedList<TreeNode>> createDepthLinkedListBFS(TreeNode root) {
         ArrayList<LinkedList<TreeNode>> result = new ArrayList<LinkedList<TreeNode>>();
 
+        // We want to iterate through the root first, then level 2, then level3, and so on.
+        // - With each level i, we will have already fully visited all nodes on level i - 1.
+        // - to get which nodes are on level i, we can simply look at all children of the nodes of level i - 1.
         if (root != null) {
-            // Visit a root
+            // Visit the root
             LinkedList<TreeNode> current = new LinkedList<TreeNode>();
             current.add(root);
 
             // Queue 대신 이미 존재하는 Depth별 LinkedList 를 사용하면 된다.
             while (current.size() > 0) {
-                result.add(current);
+                result.add(current);    // Add previous depth
 
-                LinkedList<TreeNode> parents = current;
+                LinkedList<TreeNode> parents = current; // Go to next depth
                 current = new LinkedList<TreeNode>();
 
+                // Visit the children
                 for (TreeNode parent : parents) {
                     if (parent.left != null) {
                         current.add(parent.left);
@@ -62,6 +76,9 @@ public class TreeGraph04 {
 
     //--------------------------------------------------------------------------------
     // Solution #2. Depth First Search (a.k.a pre-order traversal; DLR) --> "Recurse"
+    //              - O(N) time
+    //              - O(N) space: recursive calls (in a balanced tree) --> O(logN)
+    //                            ==>> dwarfed by the O(N) data that must be returned.
     //--------------------------------------------------------------------------------
     private static void createDepthLinkedListDFS(TreeNode node,
                                                  int depth,
