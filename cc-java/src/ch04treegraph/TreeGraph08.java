@@ -1,5 +1,6 @@
 package ch04treegraph;
 
+import lib.AssortedMethods;
 import lib.TreeNode;
 
 /**
@@ -18,7 +19,7 @@ import lib.TreeNode;
  * 4.10 Check Subtree: T1 and T2 are two very large binary trees, with T1 much bigger than T2.
  *                     Create an algorithm to determine if T2 is a subtree of T1.
  *
- *                     A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtree of n is identical to T2 .
+ *                     A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtree of n is identical to T2.
  *                     That is, if you cut off the tree at node n, the two trees would be identical.
  *
  *                     Hints:
@@ -61,8 +62,8 @@ public class TreeGraph08 {
         - m : T2의 노드수
         - k : T2의 루트 노드값이 T1에 등장하는 빈도
         --> Run time : O(n + km)
-        --> 이것도 과대 평가이다. T1 과 T2의 차이가 발결되면 treeMatch() 가 종료하므로//
-        ==> << O(n + km)
+        --> 이것도 과대 평가이다. T1 과 T2의 차이가 발견되면 treeMatch() 가 종료하므로
+        ==> <<< O(n + km)
 
     3) 메모리 필요: O(n + m) vs. O(log n + log m)
     4) 수행 시간: O(n + m) vs. O(nm) <-- worst ???
@@ -75,13 +76,16 @@ public class TreeGraph08 {
     ==> 두 번째 방법이 공간 효율 측면, 시간측면에서 모두 효율적이다.
     */
 
-    // pre-order traversal --> stringify --> indexOf >= 0
+    //--------------------------------------------------------------------------------
+    // Solution #1: Stringify + Pre-order traversal --> indexOf() >= 0
+    //--------------------------------------------------------------------------------
     private static void getOrderString(TreeNode t, StringBuilder sb)  {
         if (t == null) {
             sb.append("X");
             return;
         }
 
+        //TODO: whatever traversal???
         sb.append(t.data);
         getOrderString(t.left, sb);
         getOrderString(t.right, sb);
@@ -94,21 +98,23 @@ public class TreeGraph08 {
             return true;
         }
 
-        StringBuilder string1 = new StringBuilder();
-        StringBuilder string2 = new StringBuilder();
+        StringBuilder sb1 = new StringBuilder();
+        StringBuilder sb2 = new StringBuilder();
 
-        // stringify left
-        getOrderString(t1, string1);
+        // Stringify t1
+        getOrderString(t1, sb1);
 
-        // stringify right
-        getOrderString(t2, string2);
+        // Stringify t2
+        getOrderString(t2, sb2);
 
-        // indexOf >= 0
-        return string1.indexOf(string2.toString()) >= 0;
+        // Include or not
+        return sb1.indexOf(sb2.toString()) >= 0;
     }
 
 
-    // traverse all: t1.data == t2.data --> t1.subtree(L/R) == t2.subtree)(L/R)
+    //--------------------------------------------------------------------------------
+    // Solution #2: Whatever traversal: t1.data == t2.data --> t1.subtree(L/R) == t2.subtree(L/R)
+    //--------------------------------------------------------------------------------
     private static boolean matchTree(TreeNode t1, TreeNode t2) {
         // any traversal method is OK
         if (t1 == null && t2 == null) {
@@ -142,5 +148,45 @@ public class TreeGraph08 {
         return subTree(t1, t2);
     }
 
+
+    //--------------------------------------------------------------------------------
     // Main
+    //--------------------------------------------------------------------------------
+    public static void main(String[] args) {
+        // Sample 01
+        int[] array1 = {1, 2, 1, 3, 1, 1, 5};
+        int[] array2 = {2, 3, 1};
+
+        TreeNode t1 = AssortedMethods.createTreeFromArray(array1);
+        TreeNode t2 = AssortedMethods.createTreeFromArray(array2);
+
+        if (containsTree01(t1, t2)) {
+            System.out.println("containsTree01: t2 is a subtree of t1");
+        } else {
+            System.out.println("containsTree01: t2 is not a subtree of t1");
+        }
+
+        if (containsTree02(t1, t2)) {
+            System.out.println("containsTree02: t2 is a subtree of t1");
+        } else {
+            System.out.println("containsTree02: t2 is not a subtree of t1");
+        }
+
+        // Sample 02
+        int[] array3 = {1, 2, 3};
+        TreeNode t3 = AssortedMethods.createTreeFromArray(array1);
+        TreeNode t4 = AssortedMethods.createTreeFromArray(array3);
+
+        if (containsTree01(t3, t4)) {
+            System.out.println("containsTree01: t4 is a subtree of t3");
+        } else {
+            System.out.println("containsTree01: t4 is not a subtree of t3");
+        }
+
+        if (containsTree02(t3, t4)) {
+            System.out.println("containsTree02: t4 is a subtree of t3");
+        } else {
+            System.out.println("containsTree02: t4 is not a subtree of t3");
+        }
+    }
 }
