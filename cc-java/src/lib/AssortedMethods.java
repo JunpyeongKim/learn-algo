@@ -113,20 +113,20 @@ public class AssortedMethods {
     public static TreeNode createTreeFromArray(int[] array) {
         if (array.length > 0) {
             TreeNode root = new TreeNode(array[0]);
-            Queue<TreeNode> q = new LinkedList<TreeNode>();
+            Queue<TreeNode> q = new LinkedList<TreeNode>(); // add(), remove(), element()
             int index = 1;
 
-            q.add(root);
+            q.add(root);    // or q.offer(root);
 
             while (index < array.length) {
                 TreeNode node = q.element();    // or q.peek();
 
                 if (node.left == null) {
                     node.left = new TreeNode(array[index++]);
-                    q.add(node.left);   // or q.offer();
+                    q.add(node.left);   // or q.offer(node.left);
                 } else if (node.right == null) {
                     node.right = new TreeNode(array[index++]);
-                    q.add(node.right);  // or q.offer();
+                    q.add(node.right);  // or q.offer(node.right);
                 } else {
                     q.remove(); // or q.poll();
                 }
