@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cc-java/cc-java.iml" filepath="$PROJECT_DIR$/cc-java/cc-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cm-java/cm-java.iml" filepath="$PROJECT_DIR$/cm-java/cm-java.iml" />
+    </modules>
+  </component>
+</project>

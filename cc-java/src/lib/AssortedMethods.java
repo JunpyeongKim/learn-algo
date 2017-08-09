@@ -1,5 +1,8 @@
 package lib;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class AssortedMethods {
     public static int randomInt(int n) {
         return (int) (Math.random() * n);
@@ -107,31 +110,28 @@ public class AssortedMethods {
         return sb.toString();
     }
 
-    //TODO:
     public static TreeNode createTreeFromArray(int[] array) {
         if (array.length > 0) {
             TreeNode root = new TreeNode(array[0]);
-            java.util.Queue<TreeNode> queue = new java.util.LinkedList<TreeNode>();
-            queue.add(root);
-            boolean done = false;
-            int i = 1;
-            while (!done) {
-                TreeNode r = (TreeNode) queue.element();
-                if (r.left == null) {
-                    r.left = new TreeNode(array[i]);
-                    i++;
-                    queue.add(r.left);
-                } else if (r.right == null) {
-                    r.right = new TreeNode(array[i]);
-                    i++;
-                    queue.add(r.right);
+            Queue<TreeNode> q = new LinkedList<TreeNode>();
+            int index = 1;
+
+            q.add(root);
+
+            while (index < array.length) {
+                TreeNode node = q.element();    // or q.peek();
+
+                if (node.left == null) {
+                    node.left = new TreeNode(array[index++]);
+                    q.add(node.left);   // or q.offer();
+                } else if (node.right == null) {
+                    node.right = new TreeNode(array[index++]);
+                    q.add(node.right);  // or q.offer();
                 } else {
-                    queue.remove();
-                }
-                if (i == array.length) {
-                    done = true;
+                    q.remove(); // or q.poll();
                 }
             }
+
             return root;
         } else {
             return null;
