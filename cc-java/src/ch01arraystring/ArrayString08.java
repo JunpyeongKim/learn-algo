@@ -19,18 +19,7 @@ package ch01arraystring;
  *
  *                      Hints: #34, #88, #104
  */
-
-/**
- * substring 은 String.indexOf() 로 구현 가능
- * 회전시킨 포인트의 중요성 보다 --> isSubstring()으로 회전시켰다는 것이 확인 가능하다는것이 중요
- */
 public class ArrayString08 {
-    /*
-        Regardless of where the division (the rotation point) between x and y.
-        --> yx will always be a substring of xyxy.
-     */
-
-
     public static boolean isSubString(String big, String small) {
         return big.indexOf(small) >= 0;
 //        return big.contains(small);
@@ -40,7 +29,11 @@ public class ArrayString08 {
     public static boolean isRotation(String s1, String s2) {
         int len = s1.length();
 
+        // Equal length and not empty
         if (len == s2.length() && len > 0) {
+
+            // Regardless of where the division (the rotation point) between x and y is.
+            // --> yx will always be a substring of xyxy.
             String s1s1 = s1 + s1;
             return isSubString(s1s1, s2);
         }
