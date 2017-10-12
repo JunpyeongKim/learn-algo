@@ -13,6 +13,7 @@ import lib.AssortedMethods;
  * 1.8 Zero Matrix: Write an algorithm such that if an element in an MxN matrix is 0,
  *                  its entire row and column are set to 0.
  *
+ *                  Hints: #17, #74, #102
  */
 public class ArrayString07 {
     //--------------------------------------------------------------------------------
@@ -32,14 +33,16 @@ public class ArrayString07 {
 
 
     //--------------------------------------------------------------------------------
-    // Solution #1. Buffer - boolean or a bit vector
-    //              - Space Complexity: O(n)
+    // Solution #1. Buffer --> boolean array or a bit vector
+    //              - Space Complexity: O(M + N --> n)  //TODO: O(N)
+    //              - Time Complexity:
     //--------------------------------------------------------------------------------
     public static void setZeros01(int[][] matrix) {
         boolean[] rows = new boolean[matrix.length];
         boolean[] columns = new boolean[matrix[0].length];
+        //TODO: a bit vector Buffer ??? 32(int) | 64(long) 인 경우만 ???
 
-        // Flags the zero locations
+        // Check for zeros in the array
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 if (matrix[i][j] == 0) {
@@ -49,8 +52,7 @@ public class ArrayString07 {
             }
         }
 
-        // Nullify
-//        /* Alternative 01: Time Complexity, O(n)
+        // Nullify 01: Time Complexity, O(M + N --> n)    //TODO: ???
         for (int i = 0; i < rows.length; i++) {
             if (rows[i]) {
                 nullifyRow(matrix, i);
@@ -62,29 +64,27 @@ public class ArrayString07 {
                 nullifyColumn(matrix, j);
             }
         }
-        //*/
 
-        /* Alternative 02: Time Complexity, O(n^2)
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                if (rows[i] || columns[j]) {
-                    matrix[i][j] = 0;
-                }
-            }
-        }
-        //*/
+        // Nullify 02: Time Complexity, O(n^2)  //TODO: O(M*N --> N^2)
+        // for (int i = 0; i < matrix.length; i++) {
+        //     for (int j = 0; j < matrix[0].length; j++) {
+        //         if (rows[i] || columns[j]) {
+        //             matrix[i][j] = 0;
+        //         }
+        //     }
+        // }
     }
 
 
     //--------------------------------------------------------------------------------
-    // Solution #1. No Buffer - in place
+    // Solution #2. Buffer --> in-place
     //              - Space Complexity: O(1)
     //--------------------------------------------------------------------------------
     public static void setZeros02(int[][] matrix) {
         boolean firstRowHasZero = false,
                 firstColumnHasZero = false;
 
-        // Check if the first row and first column have any zeros.
+        // Check if the first row has any zeros.
         for (int j = 0; j < matrix[0].length; j++) {
             if (matrix[0][j] == 0) {
                 firstRowHasZero = true;
@@ -92,6 +92,7 @@ public class ArrayString07 {
             }
         }
 
+        // Check if the first column has any zeros.
         for (int i = 0; i < matrix.length; i++) {
             if (matrix[i][0] == 0) {
                 firstColumnHasZero = true;
@@ -99,12 +100,12 @@ public class ArrayString07 {
             }
         }
 
-        // Flags the zero locations in the rest of the array.
+        // Check for zeros in the rest of the array.
         for (int i = 1; i < matrix.length; i++) {
             for (int j = 1; j < matrix[0].length; j++) {
                 if (matrix[i][j] == 0) {
-                    matrix[i][0] = 0;
-                    matrix[0][j] = 0;
+                    matrix[i][0] = 0;   // row
+                    matrix[0][j] = 0;   // column
                 }
             }
         }
@@ -136,12 +137,12 @@ public class ArrayString07 {
     // Main
     //--------------------------------------------------------------------------------
     private static int[][] cloneMatrix(int[][] matrix) {
-        int nrows = matrix.length;
-        int ncolumns = matrix[0].length;
-        int[][] clone = new int[nrows][ncolumns];
+        int nRows = matrix.length;
+        int nColumns = matrix[0].length;
+        int[][] clone = new int[nRows][nColumns];
 
-        for (int i = 0; i < nrows; i++) {
-            for (int j = 0; j < ncolumns; j++) {
+        for (int i = 0; i < nRows; i++) {
+            for (int j = 0; j < nColumns; j++) {
                 clone[i][j] = matrix[i][j];
             }
         }
@@ -166,24 +167,28 @@ public class ArrayString07 {
     }
 
     public static void main(String[] args) {
-        int nrows = 10, ncolumns = 15;
-        int[][] matrix01 = AssortedMethods.randomMatrix(nrows, ncolumns, -10, 10);
+        int nRows = 10,
+            nColumns = 15;
+        int[][] matrix01 = AssortedMethods.randomMatrix(nRows, nColumns, -10, 10);
         int[][] matrix02 = cloneMatrix(matrix01);
 
-        System.out.println("Before...");
-        AssortedMethods.printMatrix(matrix01);
-
-        setZeros01(matrix01);
-        setZeros02(matrix02);
-
-        System.out.println("After...");
+        System.out.println("---> Before...");
         AssortedMethods.printMatrix(matrix01);
         AssortedMethods.printMatrix(matrix02);
 
+        System.out.println("---> Nullify...\n");
+        setZeros01(matrix01);
+        setZeros02(matrix02);
+
+        System.out.println("---> After...");
+        AssortedMethods.printMatrix(matrix01);
+        AssortedMethods.printMatrix(matrix02);
+
+        // Conclude
         if (matricesAreEqual(matrix01, matrix02)) {
-            System.out.println("Equal");
+            System.out.println("---> Equal");
         } else {
-            System.out.println("Not Equal");
+            System.out.println("---> Not Equal");
         }
     }
 }
