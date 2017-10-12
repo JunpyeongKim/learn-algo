@@ -1,5 +1,7 @@
 package ch01arraystring;
 
+// 1st 정리 기준 : Korean Edition 기준으로 정리
+
 // Done 1
 /**
  * 1.1 문자열에 포함된 문자들이 전부 유일한지를 검사하는 알고리즘을 구현하라.
@@ -103,7 +105,7 @@ package ch01arraystring;
 
 
 //--------------------------------------------------------------------------------
-// Korean Edition: Unsolved --> 2, 7
+// Korean Edition: Unsolved --> 2, 6, 7
 //--------------------------------------------------------------------------------
 
 // TBD 2
@@ -115,13 +117,41 @@ package ch01arraystring;
  *     (C-String means that “abcd” is represented as five characters, including the null character.)
  */
 
+// TBD 6
+/**
+ * 1.6 이미지를 표현하는 NxN 행렬이 있다. 이미지의 각 픽셀은 4바이트로 표현된다.
+ *     이때, 이미지를 90도 회전시키는 메서드를 작성하라.
+ *     부가적인 행렬을 사용하지 않고서도 할 수 있겠는가?
+ *
+ * (6E)
+ * 1.7 Rotate Matrix: Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes,
+ *                    write a method to rotate the image by 90 degrees.
+ *                    Can you do this in place?
+ *
+ *                    Hints: #51, #100
+ */
+
 // TBD 7
 /**
  * 1.7 MxN 행렬의 한 원소가 0일 경우, 해당 원소가 속한 행과 열의 모든 원소를 0으로 설정하는 알고리즘을 작성하라.
+ *
+ * (6E)
+ * 1.8 Zero Matrix: Write an algorithm such that if an element in an MxN matrix is 0,
+ *                  its entire row and column are set to O.
+ *
+ *                  Hints: # 17, #74, #102
  */
 
 //--------------------------------------------------------------------------------
-// English Edition: Unsolved --> 4E(), 6E()
+// English Edition: Unsolved --> KE(8개: 1, ), 4E(8개: 7, ), 6E(9개: 8, )
 //--------------------------------------------------------------------------------
 public class ArrayString {
 }
+
+//--------------------------------------------------------------------------------
+// Related Problems: #8
+//--------------------------------------------------------------------------------
+/**
+ *
+ * 비트 조작(5.7), 객체지향설계(7.10), 재귀(9.3), 정렬과 탐색(9.6), C++(13.10), 중간 난이도 연습문제(17.7, 17.8, 17.14)
+ */
