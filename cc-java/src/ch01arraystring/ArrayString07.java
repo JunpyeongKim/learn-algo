@@ -35,7 +35,7 @@ public class ArrayString07 {
     //--------------------------------------------------------------------------------
     // Solution #1. Buffer --> boolean array or a bit vector
     //              - Space Complexity: O(M + N --> n)  //TODO: O(N)
-    //              - Time Complexity:
+    //              - Time Complexity: M*N + M*N | M*N --> n^2  //TODO:
     //--------------------------------------------------------------------------------
     public static void setZeros01(int[][] matrix) {
         boolean[] rows = new boolean[matrix.length];
@@ -52,7 +52,7 @@ public class ArrayString07 {
             }
         }
 
-        // Nullify 01: Time Complexity, O(M + N --> n)    //TODO: ???
+        // Nullify 01: Time Complexity, O(M + N --> n)    //TODO: M*N + M*N ???
         for (int i = 0; i < rows.length; i++) {
             if (rows[i]) {
                 nullifyRow(matrix, i);

@@ -21,6 +21,15 @@ package ch01arraystring;
  *                  #132. Can you solve it in O(N logN) time? What might a solution like that look like?
  */
 
+// TBD 2
+/**
+ * 1.2 널 문자로 끝나는 문자열을 뒤집는 reverse(char* str) 함수를 C나 C++로 구현하라.
+ *
+ * (4E)
+ * 1.2 Write code to reverse a C-Style String.
+ *     (C-String means that “abcd” is represented as five characters, including the null character.)
+ */
+
 // Done 3
 /**
  * 1.3 문자열 두 개를 입력으로 받아 그 중 하나가 다른 하나의 순열인지 판별하는 메서드를 작성하라.
@@ -82,6 +91,35 @@ package ch01arraystring;
  *                          #110 - Be careful that you aren't repeatedly concatenating strings together. This can be very inefficient.
  */
 
+// TBD 6
+/**
+ * 1.6 이미지를 표현하는 NxN 행렬이 있다. 이미지의 각 픽셀은 4바이트로 표현된다.
+ *     이때, 이미지를 90도 회전시키는 메서드를 작성하라.
+ *     부가적인 행렬을 사용하지 않고서도 할 수 있겠는가?
+ *
+ * (6E)
+ * 1.7 Rotate Matrix: Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes,
+ *                    write a method to rotate the image by 90 degrees.
+ *                    Can you do this in place?
+ *
+ *                    Hints: #51, #100
+ */
+
+// Done 7
+/**
+ * 1.7 MxN 행렬의 한 원소가 0일 경우, 해당 원소가 속한 행과 열의 모든 원소를 0으로 설정하는 알고리즘을 작성하라.
+ *
+ * (4E)
+ * 1.7 Write an algorithm such that if an element in an MxN matrix is 0,
+ *     its entire row and column is set to 0.
+ *
+ * (6E)
+ * 1.8 Zero Matrix: Write an algorithm such that if an element in an MxN matrix is 0,
+ *                  its entire row and column are set to 0.
+ *
+ *                  Hints: #17, #74, #102
+ */
+
 // Done 8
 /**
  * 1.8 한 단어가 다른 단어에 포함된 문자열인지 판별하는 isSubString 이라는 메서드가 있다고 하자.
@@ -103,47 +141,8 @@ package ch01arraystring;
  *                      Hints: #34, #88, #104
  */
 
-
 //--------------------------------------------------------------------------------
-// Korean Edition: Unsolved --> 2, 6, 7
-//--------------------------------------------------------------------------------
-
-// TBD 2
-/**
- * 1.2 널 문자로 끝나는 문자열을 뒤집는 reverse(char* str) 함수를 C나 C++로 구현하라.
- *
- * (4E)
- * 1.2 Write code to reverse a C-Style String.
- *     (C-String means that “abcd” is represented as five characters, including the null character.)
- */
-
-// TBD 6
-/**
- * 1.6 이미지를 표현하는 NxN 행렬이 있다. 이미지의 각 픽셀은 4바이트로 표현된다.
- *     이때, 이미지를 90도 회전시키는 메서드를 작성하라.
- *     부가적인 행렬을 사용하지 않고서도 할 수 있겠는가?
- *
- * (6E)
- * 1.7 Rotate Matrix: Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes,
- *                    write a method to rotate the image by 90 degrees.
- *                    Can you do this in place?
- *
- *                    Hints: #51, #100
- */
-
-// TBD 7
-/**
- * 1.7 MxN 행렬의 한 원소가 0일 경우, 해당 원소가 속한 행과 열의 모든 원소를 0으로 설정하는 알고리즘을 작성하라.
- *
- * (6E)
- * 1.8 Zero Matrix: Write an algorithm such that if an element in an MxN matrix is 0,
- *                  its entire row and column are set to O.
- *
- *                  Hints: # 17, #74, #102
- */
-
-//--------------------------------------------------------------------------------
-// English Edition: Unsolved --> KE(8개: 1, ), 4E(8개: 7, ), 6E(9개: 8, )
+// English Edition: KE(8개: 7, ), 4E(8개: 7, ), 6E(9개: 8, )
 //--------------------------------------------------------------------------------
 public class ArrayString {
 }
