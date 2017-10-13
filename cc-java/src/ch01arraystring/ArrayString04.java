@@ -27,19 +27,7 @@ package ch01arraystring;
  *              #53: It's often easiest to modify strigns by going from the end of the string to the beginning.
  *              #118: You might find you need to know the number of spaces. Can you just count them?
  */
-
-/**
- * 문자열 / 배열의 뒤쪽에 충분한 공간이 있다면 뒤에서 부터 작업하는것이 합리적이다.
- */
 public class ArrayString04 {
-    /*
-        A common approach in string manipulation is starting from the end and working backwards.
-
-        Using character array: because Java strings are immutable.
-        --> Using strings directly, in just one pass.
-     */
-
-
     private static int findLastCharacter(char[] str) {
         for (int i = str.length - 1; i >= 0; i--) {
             if (str[i] != ' ')
@@ -49,6 +37,7 @@ public class ArrayString04 {
         return -1;
     }
 
+    //TODO: Complexity
     // Time Complexity: O(n)
     // Space Complexity: O(1)
     public static void replaceSpaces(char[] str, int trueLength) {
@@ -59,9 +48,10 @@ public class ArrayString04 {
                 spaceCount++;
         }
 
+        // A common approach in string manipulation is starting from the end and working backwards.
+        // Using character array: because Java strings are immutable.
+        // --> Using strings directly, in just one pass.
         int newLength = trueLength + spaceCount * 2;
-//        if (newLength < str.length)
-//            str[newLength] = '\0';
 
         for (int i = trueLength - 1; i >= 0; i--) {
             if (str[i] == ' ') {
@@ -79,16 +69,15 @@ public class ArrayString04 {
     // Main
     //--------------------------------------------------------------------------------
     public static void main(String[] args) {
-        //--------------------------------------------------------------------------------
         // Sample 01
         String str = "Mr John Smith    ";
         char[] arr = str.toCharArray();
         int trueLength = findLastCharacter(arr) + 1;
 
         replaceSpaces(arr, trueLength);
+
         System.out.println("\"" + str + "\"" + " -> \"" + String.valueOf(arr) + "\"");
 
-        //--------------------------------------------------------------------------------
         // Sample 02
         str = "abc d e f";
         arr = new char[str.length() + 3 * 2];
@@ -101,6 +90,7 @@ public class ArrayString04 {
         System.arraycopy(str.toCharArray(), 0, arr, 0, str.length());
 
         replaceSpaces(arr, str.length());
+
         System.out.println("\"" + str + "\"" + " -> \"" + String.valueOf(arr) + "\"");
     }
 }
