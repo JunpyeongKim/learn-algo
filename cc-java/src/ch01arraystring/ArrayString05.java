@@ -16,20 +16,9 @@ package ch01arraystring;
  *                          #92 - Do the easy thing first. Compress the string, then compare  the lengths.
  *                          #110 - Be careful that you aren't repeatedly concatenating strings together. This can be very inefficient.
  */
-
-/**
- * 스트링을 다루므로 비효율적인 스트링 더하기가 없도록 만들어야 하는 것이 핵심이다.
- * 즉, StringBuffer, StringBuilder, Array 를 이용하여 스트링을 만들어 낸다.
- *
- * 1) 압축된 길이가 원래 길이와 달라야 한다. --> 문자열 작업을 할때는 공간 낭비가 심하므로 먼저 길이를 계산한다.
- * 2) 단순 스트링 연결 또는 버퍼(StringBuffer/StringBuilder, Array)를 이용하여 스트링을 생성
- * 3) 문자 반복을 처리하는 알고리즘을 2가지 다른 방법으로 해결 가능
- *      A) 마지막 문자 기억
- *      B) 인접 문자 비교
- */
 public class ArrayString05 {
     //--------------------------------------------------------------------------------
-    // Solution #1. Bad - String
+    // Solution #1. Bad: String + charAt()
     //              - Time Complexity: O(p + k^2)
     //                  - p: the size of the original string
     //                  - k: the number of character sequences
@@ -42,7 +31,27 @@ public class ArrayString05 {
         String compressedString = "";
 
         // Alternative 01
-        /*
+        int countConsecutive = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            countConsecutive++;
+
+            if (i + 1 >= str.length() || str.charAt(i) != str.charAt(i+1)) {
+                compressedString += "" + str.charAt(i) + countConsecutive;
+                countConsecutive = 0;
+            }
+        }
+
+        return compressedString.length() < str.length() ? compressedString : str;
+    }
+
+    public static String compressBadAlternative(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+
+        String compressedString = "";
+
         char last = str.charAt(0);
         int countConsecutive = 1;
 
@@ -58,76 +67,42 @@ public class ArrayString05 {
         }
 
         compressedString += last + String.valueOf(countConsecutive); // or last + "" + countConsecutive;
-        */
-
-        // Alternative 02
-        int countConsecutive = 0;
-
-        for (int i = 0; i < str.length(); i++) {
-            countConsecutive++;
-
-            if (i + 1 >= str.length() || str.charAt(i) != str.charAt(i+1)) {
-                compressedString += "" + str.charAt(i) + countConsecutive;
-                countConsecutive = 0;
-            }
-        }
 
         return compressedString.length() < str.length() ? compressedString : str;
     }
 
 
     //--------------------------------------------------------------------------------
-    // Solution #2. Better - StringBuffer/StringBuilder
+    // Solution #2. Better: StringBuilder + charAt()
     //--------------------------------------------------------------------------------
-    private static int countCompression01(String str) {
-        if (str == null || str.isEmpty())
-            return 0;
-
-        // Alternative 01
-        /*
-        int countConsecutive = 1;
-        int compressedCount = 0;
-        char last = str.charAt(0);
-
-        for (int i = 1; i < str.length(); i++) {
-            if (last == str.charAt(i)) {
-                countConsecutive++;
-            } else {
-                compressedCount += 1 + String.valueOf(countConsecutive).length();
-                last = str.charAt(i);
-                countConsecutive = 1;
-            }
+    public static String compressBetter(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
         }
 
-        compressedCount += 1 + String.valueOf(countConsecutive).length();
-        */
-
-        // Alternative 02
+        StringBuilder compressedString = new StringBuilder();
         int countConsecutive = 0;
-        int compressedCount = 0;
 
         for (int i = 0; i < str.length(); i++) {
             countConsecutive++;
 
             if (i + 1 >= str.length() || str.charAt(i) != str.charAt(i+1)) {
-                compressedCount += 1 + String.valueOf(countConsecutive).length();
+                compressedString.append(str.charAt(i));
+                compressedString.append(countConsecutive);
+
                 countConsecutive = 0;
             }
         }
 
-        return compressedCount;
+        return compressedString.length() < str.length() ? compressedString.toString() : str;
     }
 
-    // Counting & StringBuffer/StringBuilder
-    public static String compressBetter(String str) {
-        int size = countCompression01(str);
-        if (size == 0 || size >= str.length())
+    public static String compressBetterAlternative(String str) {
+        if (str == null || str.isEmpty()) {
             return str;
+        }
 
-        StringBuffer compressedString = new StringBuffer(size);   // or StringBuilder
-
-        // Alternative 01
-        /*
+        StringBuilder compressedString = new StringBuilder();
         char last = str.charAt(0);
         int countConsecutive = 1;
 
@@ -145,34 +120,64 @@ public class ArrayString05 {
 
         compressedString.append(last);
         compressedString.append(countConsecutive);
-        */
 
-        // Alternative 02
+        return compressedString.length() < str.length() ? compressedString.toString() : str;
+    }
+
+    //--------------------------------------------------------------------------------
+    // Solution #3. Best: StringBuffer + charAt() + count
+    //TODO: Complexity
+    //--------------------------------------------------------------------------------
+    private static int countCompression(String str) {
+        if (str == null || str.isEmpty())
+            return 0;
+
+        int countConsecutive = 0;
+        int countCompressed = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            countConsecutive++;
+
+            if (i+1 >= str.length() || str.charAt(i) != str.charAt(i+1)) {
+                countCompressed += 1 + String.valueOf(countConsecutive).length();   // e.g., a2 --> 2
+                countConsecutive = 0;
+            }
+        }
+
+        return countCompressed;
+    }
+
+    public static String compressBest(String str) {
+        int size = countCompression(str);
+        if (size == 0 || size >= str.length())
+            return str;
+
+        StringBuffer compressed = new StringBuffer(); // thread-safe
         int countConsecutive = 0;
 
         for (int i = 0; i < str.length(); i++) {
             countConsecutive++;
 
-            if (i + 1 >= str.length() || str.charAt(i) != str.charAt(i+1)) {
-                compressedString.append(str.charAt(i));
-                compressedString.append(countConsecutive);
-
+            if (i+1 >= str.length() || str.charAt(i) != str.charAt(i+1)) {
+                compressed.append(str.charAt(i));
+                compressed.append(countConsecutive);
                 countConsecutive = 0;
             }
         }
 
-        return compressedString.toString();
+        return compressed.toString();
     }
 
-
     //--------------------------------------------------------------------------------
-    // Solution #3. Alternative - Counting & [CharArray(in place) | StringBuffer]
+    // Solution #4. Best & Alternative: Array + charAt() + count
+    //TODO: Complexity
+    //              - Time Complexity: O(n)
+    //              - Space Complexity: O(n)
     //--------------------------------------------------------------------------------
-    private static int setChar(char[] array, char c, int index, int count) {
+    private static int setChar(char[] array, int index, char c, int count) {
         array[index++] = c;
 
-//        char[] countArray = String.valueOf(count).toCharArray();
-        char[] countArray = Integer.toString(count).toCharArray();
+       char[] countArray = String.valueOf(count).toCharArray();  // or Integer.toString(count).toCharArray();
 
         for (char cnt : countArray) {
             array[index++] = cnt;
@@ -181,48 +186,92 @@ public class ArrayString05 {
         return index;
     }
 
-    // Counting & CharArray(in place)
-    // Time Complexity: O(n)
-    // Space Complexity: O(n)
-    public static String compressAlternative(String str) {
-        int size = countCompression01(str);
+    private static int countCompressionAlternative01(String str) {
+        if (str == null || str.isEmpty())
+            return 0;
+
+        int countCompressed = 0;
+        int countConsecutive = 0;
+
+        for (int i = 1; i < str.length(); i++) {
+            countConsecutive++;
+
+            if (i+1 >= str.length() || str.charAt(i) != str.charAt(i+1)) {
+                countCompressed += 1 + String.valueOf(countConsecutive).length();   // e.g., a2 --> 2
+                countConsecutive = 0;
+            }
+        }
+
+        return countCompressed;
+    }
+
+    public static String compressBestAlternative01(String str) {
+        int size = countCompressionAlternative01(str);
         if (size == 0 || size >= str.length())
             return str;
 
-        char[] compressedString = new char[size];
+        char[] compressed = new char[size];
+        int countConsecutive = 0;
         int index = 0;
 
-        // Alternative 01
-        /*
-        char last = str.charAt(0);
+        for (int i = 0; i < str.length(); i++) {
+            countConsecutive++;
+
+            if (i+1 >= str.length() || str.charAt(i) != str.charAt(i+1)) {
+                index = setChar(compressed, index, str.charAt(i), countConsecutive);
+                countConsecutive = 0;
+            }
+        }
+
+        return String.valueOf(compressed);  // or new String(compressed);
+    }
+
+    private static int countCompressionAlternative02(String str) {
+        if (str == null || str.isEmpty())
+            return 0;
+
+        int countCompressed = 0;
         int countConsecutive = 1;
+        char last = str.charAt(0);
 
         for (int i = 1; i < str.length(); i++) {
             if (last == str.charAt(i)) {
                 countConsecutive++;
             } else {
-                index = setChar(compressedString, last, index, countConsecutive);
+                countCompressed += 1 + String.valueOf(countConsecutive).length();   // e.g., a2 --> 2
                 last = str.charAt(i);
                 countConsecutive = 1;
             }
         }
 
-        index = setChar(compressedString, last, index, countConsecutive);
-        */
+        countCompressed += 1 + String.valueOf(countConsecutive).length();   // e.g., a2 --> 2
 
-        // Alternative 02
-        int countConsecutive = 0;
+        return countCompressed;
+    }
 
-        for (int i = 0; i < str.length(); i++) {
-            countConsecutive++;
+    public static String compressBestAlternative02(String str) {
+        int size = countCompressionAlternative02(str);
+        if (size == 0 || size >= str.length())
+            return str;
 
-            if (i + 1 >= str.length() || str.charAt(i) != str.charAt(i+1)) {
-                index = setChar(compressedString, str.charAt(i), index, countConsecutive);
-                countConsecutive = 0;
+        char[] compressed = new char[size];
+        char last = str.charAt(0);
+        int countConsecutive = 1;
+        int index = 0;
+
+        for (int i = 1; i < str.length(); i++) {
+            if (last == str.charAt(i)) {
+                countConsecutive++;
+            } else {
+                index = setChar(compressed, index, last, countConsecutive);
+                last = str.charAt(i);
+                countConsecutive = 1;
             }
         }
 
-        return new String(compressedString);    // or String.valueOf(compressedString);
+        index = setChar(compressed, index, last, countConsecutive);
+
+        return String.valueOf(compressed);  // or new String(compressed);
     }
 
 
@@ -234,9 +283,10 @@ public class ArrayString05 {
 
         for (String str : strs) {
             System.out.println(str + " : \n"
-                    + "\tBad - " + compressBad(str) + "\n"
-                    + "\tBetter - " + compressBetter(str) + "\n"
-                    + "\tAlternative - " + compressAlternative(str));
+                    + "---> Bad(String + charAt()): " + compressBad(str) + ", " + compressBadAlternative(str) + "\n"
+                    + "---> Better(StringBuilder + charAt()): " + compressBetter(str) + ", " + compressBetterAlternative(str) + "\n"
+                    + "---> Best(StringBuffer + charAt() + count): " + compressBest(str) + "\n"
+                    + "---> BestAlternative(Array + charAt() + count): " + compressBestAlternative01(str) + ", " + compressBestAlternative02(str));
         }
     }
 }
