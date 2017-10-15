@@ -8,11 +8,11 @@ package ch01arraystring;
  *     다른 자료구조를 사용할 수 없는 상황이라면 어떻게 하겠는가?
  *
  * (4E)
- *  1.1 Implement an algorithm to determine if a string has all unique characters.
+ * 1.1 Implement an algorithm to determine if a string has all unique characters.
  *      What if you can not use additional data structures?
  *
  * (6E)
- *  1.1 Is Unique: Implement an algorithm to determine if a string has all unique characters.
+ * 1.1 Is Unique: Implement an algorithm to determine if a string has all unique characters.
  *                 What if you can not use additional data structures?
  *
  *                 Hint:
@@ -142,7 +142,7 @@ package ch01arraystring;
  */
 
 //--------------------------------------------------------------------------------
-// English Edition: KE(8개: 3, 4, 5, 7, 8), 4E(8개: 4, 5, 7, 8), 6E(9개: 2, 3, 6, 8, 9)
+// Completed: KE(8개: 1, 3, 4, 5, 7, 8), 4E(8개: 1, 4, 5, 7, 8), 6E(9개: 1, 2, 3, 6, 8, 9)
 //--------------------------------------------------------------------------------
 public class ArrayString {
 }
