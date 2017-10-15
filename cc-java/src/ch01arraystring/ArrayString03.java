@@ -21,12 +21,11 @@ import java.util.Arrays;
  */
 public class ArrayString03 {
     /*
-        Permutation
-            - Two strings have the same characters, but in different order.
+        Permutation --> Two strings have the same characters, but in different order.
 
         Assume that
-            - the comparison is case sensitive
-            - whitespace is significant.
+            - 1) the comparison is case-sensitive
+            - 2) whitespace is significant.
      */
 
 
@@ -46,7 +45,7 @@ public class ArrayString03 {
         if (s == null || t == null || s.length() != t.length())
             return false;
 
-        // sort and compare
+        // Sort and compare
         return sort(s).equals(sort(t));
     }
 
@@ -59,29 +58,20 @@ public class ArrayString03 {
         if (s == null || t == null || s.length() != t.length())
             return false;
 
-        // occurrences: ascii(128), extended-ascii(256), unicode(117,000~)
+        // Occurrences: ASCII(128), Extended-ASCII(256), Unicode(117,000~)
         int[] charSet = new int[256]; // Extended ASCII
         int numOfUniqueChar = 0;
         int numOfCompletedChar = 0;
 
         // Counting how many times each character appears.
-        /* Alternative 01
-        char[] s_array = s.toCharArray();
-        for (char c : s_array) {
-            if (charSet[c] == 0)
-                numOfUniqueChar++;
-
-            charSet[c]++;
-        }
-        */
-
-        // Alternative 02
         for (int i = 0; i < s.length(); i++) {
             char code = s.charAt(i);
 
+            // Complementary; Optional
             if (charSet[code] == 0)
                 numOfUniqueChar++;
 
+            // Increase
             charSet[code]++;
         }
 
@@ -89,13 +79,16 @@ public class ArrayString03 {
         for (int j = 0; j < t.length(); j++) {
             char code = t.charAt(j);
 
+            // Decrease
             if (--charSet[code] < 0)
                 return false;
 
+            // Complementary; Optional
             if (charSet[code] == 0)
                 numOfCompletedChar++;
         }
 
+        // Complementary; Optional
         if (numOfUniqueChar != numOfCompletedChar)
             return false;
 
@@ -110,12 +103,12 @@ public class ArrayString03 {
         String[][] pairs = {{"apple", "papel"}, {"carrot", "tarroc"}, {"hello", "llloh"}};
 
         for (String[] pair : pairs) {
-            String s = pair[0];
-            String t = pair[1];
+            String word1 = pair[0];
+            String word2 = pair[1];
 
-            System.out.println(s + " - " + t + " : "
-                    + permutation01(s, t) + ", "
-                    + permutation02(s, t));
+            System.out.println(word1 + " - " + word2 + " : "
+                    + permutation01(word1, word2) + ", "
+                    + permutation02(word1, word2));
         }
     }
 }
