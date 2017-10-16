@@ -21,7 +21,7 @@ package ch01arraystring;
  *                  #132. Can you solve it in O(N logN) time? What might a solution like that look like?
  */
 
-// TBD 2
+// Done 2
 /**
  * 1.2 널 문자로 끝나는 문자열을 뒤집는 reverse(char* str) 함수를 C나 C++로 구현하라.
  *
@@ -142,7 +142,7 @@ package ch01arraystring;
  */
 
 //--------------------------------------------------------------------------------
-// Completed: KE(8개: 1, 3, 4, 5, 7, 8), 4E(8개: 1, 4, 5, 7, 8), 6E(9개: 1, 2, 3, 6, 8, 9)
+// Completed: KE(8개: 1, 2, 3, 4, 5, 7, 8 - 6), 4E(8개: 1, 2, 4, 5, 7, 8 - 3, 6), 6E(9개: 1, 2, 3, 6, 8, 9 - 4, 5, 7)
 //--------------------------------------------------------------------------------
 public class ArrayString {
 }
