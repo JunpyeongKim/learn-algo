@@ -9,10 +9,11 @@ import lib.LinkedListNode;
  * 2.2 (5E)
  *      Implement an algorithm to find the nth to last element of a singly linked list.
  *
- * 2.2 (6E) Return Kth to Last:
- *      Implement an algorithm to find the kth to last element of a singly linked list.
+ * 2.2 (6E) Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
+ *
+ *                              Hints: #8, #25, #47, #67, # 726
  */
-public class Question02TBD {
+public class LinkedList02TBD {
 
     public static LinkedListNode nthToLast01(LinkedListNode head, int n) {
         //TODO:

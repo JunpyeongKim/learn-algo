@@ -5,11 +5,20 @@ import lib.LinkedListNode;
 import java.util.Stack;
 
 /**
- * 2.5 연결 리스트로 표현된 두 개의 수가 있다고 하자. 리스트의 각 노드는 해당 수의 각 자릿수를 표현한다. 이때 자릿수들은 역순으로
- *     배열되는데, 1의 자릿수가 리스트의 맨 앞에 오도록 배열된다는 뜻이다. 이 두 수를 더하여 그 합을 연결 리스트로 반환하는 함수를 작성하라.
+ * 2.5 연결 리스트로 표현된 두 개의 수가 있다고 하자.
+ *     리스트의 각 노드는 해당 수의 자릿수를 표현한다.
+ *     이때 자릿수들은 역순으로 배열되는데, 1의 자릿수가 리스트의 맨 앞에 오도록 배열된다는 뜻이다.
+ *     이 두 수를 더하여 그 합을 연결 리스트로 반환하는 함수를 작성하라.
  *
- *     연관문제:
- *      각 자릿수가 정상적으로 배열된다고 가정하고 구현해 보자.
+ *     - 예
+ *          입력: (7->1->6) + (5->9->2), 즉 617 + 295
+ *          출력: 2->1->9, 즉 912
+ *
+ *     - 연관 문제
+ *          각 자릿수가 정상적으로 배열된다고 가정하고 구현해 보자.
+ *       - 예
+ *          입력: (6->1->7) + (2->9->5), 즉 617 + 295
+ *          출력: 9->1->2, 즉 912
  *
  * 2.4 (5E)
  *      You have two numbers represented by a linked list, where each node contains a single digit.
@@ -39,7 +48,7 @@ import java.util.Stack;
  *      Input: (6 -> 1 -> 7) + (2 -> 9 -> 5). That is, 617 + 295.
  *      Output: 9 - > 1 - > 2. That is, 912.
  */
-public class Question05TBD {
+public class LinkedList05TBD {
     public static Integer reverse(LinkedListNode node) {
         Stack<Integer> stack = new Stack<Integer>();
 
