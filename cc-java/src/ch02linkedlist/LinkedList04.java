@@ -49,11 +49,11 @@ public class LinkedList04 {
 
 
     //--------------------------------------------------------------------------------
-    // Solution #1. 4-References (beforeStart, beforeEnd, afterStart, afterEnd) & Concatenation
-    //
+    // Solution #1. 4-References (beforeStart, beforeEnd, afterStart, afterEnd) && Concatenation
     //              - Time Complexity: O(n)
     //              - Space Complexity: O(1)
-    //              - Original Order(O) : 유지된다는 뜻 ??//TODO:
+    //
+    //              ==> //TODO: 두 리스트 모두 원래 리스트의 순서가 유지된다. --> Original Order(O)
     //--------------------------------------------------------------------------------
     // 2개의 리스트를 4개의 포인터로 표현 --> 4개의 참조를 가지고 하나의 리스트를 생성
     public static LinkedListNode partition01(LinkedListNode node, int x) {
@@ -99,11 +99,10 @@ public class LinkedList04 {
 
 
     //--------------------------------------------------------------------------------
-    // Solution #2. 2-References (beforeStart, afterStart) & Concatenation
-    //
+    // Solution #2. 2-References (beforeStart, afterStart) && Concatenation
     //              - Time Complexity: O(n + n/2) --> O(n)
     //              - Space Complexity: O(1)
-    //              - Original Order(X)
+    //              ==> //TODO: 두 리스트 모두 원래 리스트의 역순으로 배열된다.
     //--------------------------------------------------------------------------------
     // 2개의 리스트를 2개의 포인터로 표현 --> 2개의 참조를 가지고 하나의 리스트를 생성
     public static LinkedListNode partition02(LinkedListNode node, int x) {
@@ -144,10 +143,9 @@ public class LinkedList04 {
 
     //--------------------------------------------------------------------------------
     // Solution #3. 2-References (head, tail)
-    //
     //              - Time Complexity: O(n)
     //              - Space Complexity: O(1)
-    //              - Original Order(X)
+    //              ==> //TODO: head쪽은 역순, tail쪽은 원래 순서가 유지된다. 장점은 concatenation 불필요 --> Original Order(X)
     //--------------------------------------------------------------------------------
     // 기존 리스트를 이용하여 포인터만 변경하여 리스트 생성
     public static LinkedListNode partition03(LinkedListNode node, int x) {
@@ -235,7 +233,7 @@ public class LinkedList04 {
 
         // Partition
         runPartition(head03, 3);
-        
+
 
         //--------------------------------------------------------------------------------
         // Sample 04

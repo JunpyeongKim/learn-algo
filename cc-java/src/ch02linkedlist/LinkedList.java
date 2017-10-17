@@ -71,24 +71,25 @@ package ch02linkedlist;
 
 
 //--------------------------------------------------------------------------------
-// Korean Edition: Unsolved --> 2, 5, 6, 7
+// Completed --> KE(7개: , 4, - ), 4E(5개: - 2, 4, 5), 6E(8개: , 4, - 2, 5, 6, 7, 8)
 //--------------------------------------------------------------------------------
 
 // TBD 2
 /**
  * 2.2 단방향 연결 리스트에서, 뒤에서 k번째 원소를 찾는 알고리즘을 구현하라.
  *
- * (6E)
- * 2.2 Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
+ * 2.2 (5E)
+ *      Implement an algorithm to find the nth to last element of a singly linked list.
  *
- *                         Hints: #8, #25, #47, #67, # 726
+ * 2.2 (6E) Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
+ *
+ *                              Hints: #8, #25, #47, #67, # 726
  */
-
 
 // TBD 5
 /**
  * 2.5 연결 리스트로 표현된 두 개의 수가 있다고 하자.
- *     리스트의 각 노드는 해당 수 의 자릿수를 표현한다.
+ *     리스트의 각 노드는 해당 수의 자릿수를 표현한다.
  *     이때 자릿수들은 역순으로 배열되는데, 1의 자릿수가 리스트의 맨 앞에 오도록 배열된다는 뜻이다.
  *     이 두 수를 더하여 그 합을 연결 리스트로 반환하는 함수를 작성하라.
  *
@@ -101,21 +102,86 @@ package ch02linkedlist;
  *       - 예
  *          입력: (6->1->7) + (2->9->5), 즉 617 + 295
  *          출력: 9->1->2, 즉 912
+ *
+ * 2.4 (5E)
+ *      You have two numbers represented by a linked list, where each node contains a single digit.
+ *      The digits are stored in reverse order, such that the 1’s digit is at the head of the list.
+ *     Write a function that adds the two numbers and returns the sum as a linked list.
+ *
+ *     EXAMPLE
+ *      Input: (3 -> 1 -> 5) + (5 -> 9 -> 2)
+ *      Output: 8 -> 0 -> 8
+ *
+ *     FOLLOW UP
+ *      Suppose the digits are stored in forward order. Repeat the above problem.
+ *      Input: (6 -> 1 -> 7) + (2 -> 9 -> 5). That is, 617 + 295.
+ *      Output: 9 - > 1 - > 2. That is, 912.
+ *
+ * 2.5 (6E) Sum Lists:
+ *      You have two numbers represented by a linked list, where each node contains a single digit.
+ *      The digits are stored in reverse order, such that the 1’s digit is at the head of the list.
+ *     Write a function that adds the two numbers and returns the sum as a linked list.
+ *
+ *     EXAMPLE
+ *      Input: (7 -> 1 -> 6) + (5 -> 9 -> 2). That is, 617 + 295
+ *      Output: 2 -> 1 -> 9. That is, 912.
+ *
+ *     FOLLOW UP
+ *      Suppose the digits are stored in forward order. Repeat the above problem.
+ *      Input: (6 -> 1 -> 7) + (2 -> 9 -> 5). That is, 617 + 295.
+ *      Output: 9 - > 1 - > 2. That is, 912.
  */
 
 // TBD 6
 /**
- * 2.6 순환 연결 리스트(circular linked list)가 주어졌을 때, 순환되는 부분의 첫 노드를 반환하는 알고리즘을 작성하라.
+ * 2.6 순환 연결 리스트 (circular linked list)가 주어졌을 때, 순환되는 부분의 첫 노드를 반환하는 알고리즘을 구하라.
+ *      - 정의
+ *          순환 연결리스트: 순환 연결리스트는 노드의 next 포인터가 앞선 노드들 가운데 어느 하나를 가리키도록 설정되어 있는 연결 리스트다
+ *                       (망가진 연결리스트라고 볼 수 있다.)
+ *      - 예
+ *          입력: A -> B -> C -> D -> E -> C (E의 next 노드가 D 앞에 있는 C로 설정되어 있다.)
+ *          출력: C
+ *
+ * 2.5 (5E) Given a circular linked list,
+ *     implement an algorithm which returns node at the beginning of the loop.
+ *
+ *     DEFINITION
+ *      Circular linked list: A (corrupt) linked list in which a node’s next pointer points to an earlier node,
+ *                            so as to make a loop in the linked list.
+ *
+ *     EXAMPLE
+ *      Input: A -> B -> C -> D -> E -> C [the same C as earlier]
+ *      Output: C
+ *
+ * 2.8 (6E) Loop Detection:
+ *      Given a circular linked list, implement an algorithm that returns the node at the beginning of the loop.
+ *
+ *      DEFINITION
+ *          Circular linked list: A (corrupt) linked list in which a node's next pointer points to an earlier node,
+ *          so as to make a loop in the linked list.
+ *
+ *      EXAMPLE
+ *          Input: A -) B -) C -) 0 -) E - ) C [the same C as earlier]
+ *          Output: C
  */
 
 // TBD 7
 /**
  * 2.7 주어진 연결 리스트가 회문(palindrome)인지 검사하는 함수를 작성하라.
+ *
+ * 2.6 (6E) Palindrome:
+ *      Implement a function to check if a linked list is a palindrome.
  */
 
 
-//--------------------------------------------------------------------------------
-// English Edition: Unsolved --> 4E(2, 4, 5), 6E(2, 5, 6, 7, 8)
-//--------------------------------------------------------------------------------
+/**
+Additional Questions:
+
+트리와 그래프(4.4), 객체 지향 섥뎨(8.10), 규모확장성과 메모리 제한(11.7), 중간 난이도 연습문제(17.13)
+
+(6E)
+Trees and Graphs (#4.3), Object-Oriented Design (#7.12), System Design and Scalability
+(#9.5), Moderate Problems (#16.25), Hard Problems (#17.12).
+ */
 public class LinkedList {
 }
