@@ -22,6 +22,18 @@ package ch02linkedlist;
  *                  Hints: #9, #40
  */
 
+// TBD 2
+/**
+ * 2.2 단방향 연결 리스트에서, 뒤에서 k번째 원소를 찾는 알고리즘을 구현하라.
+ *
+ * 2.2 (5E)
+ *      Implement an algorithm to find the nth to last element of a singly linked list.
+ *
+ * 2.2 (6E) Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
+ *
+ *                              Hints: #8, #25, #47, #67, # 726
+ */
+
 // Done 3
 /**
  * 2.3 단방향 연결리스트 중간에 있는 노드 하나를 삭제하는 알고리즘을 구현하라.
@@ -67,23 +79,6 @@ package ch02linkedlist;
  *                  Output: 3 -> 1 -> 2 -> 10 -> 5 -> 5 -> 8
  *
  *                Hints: #3, #24
- */
-
-
-//--------------------------------------------------------------------------------
-// Completed --> KE(7개: 1, 3, 4, - 2, 5, 6, 7), 4E(5개: 1, 3, - 2, 4, 5), 6E(8개: 1, 3, 4, - 2, 5, 6, 7, 8)
-//--------------------------------------------------------------------------------
-
-// TBD 2
-/**
- * 2.2 단방향 연결 리스트에서, 뒤에서 k번째 원소를 찾는 알고리즘을 구현하라.
- *
- * 2.2 (5E)
- *      Implement an algorithm to find the nth to last element of a singly linked list.
- *
- * 2.2 (6E) Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
- *
- *                              Hints: #8, #25, #47, #67, # 726
  */
 
 // TBD 5
@@ -173,6 +168,9 @@ package ch02linkedlist;
  *      Implement a function to check if a linked list is a palindrome.
  */
 
+//--------------------------------------------------------------------------------
+// Completed --> KE(7개: 1, 3, 4, - 2, 5, 6, 7), 4E(5개: 1, 3, - 2, 4, 5), 6E(8개: 1, 3, 4, - 2, 5, 6, 7, 8)
+//--------------------------------------------------------------------------------
 
 /**
 Additional Questions:
