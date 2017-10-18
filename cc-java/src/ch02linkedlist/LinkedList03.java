@@ -29,23 +29,16 @@ import lib.LinkedListNode;
  *
  *      Hint #72.
  */
-
-/**
- * 연결리스트의 노드는 값과 포인터만 변경해주면 삭제 가능하므로 이 원리를 이용하자.
- */
 public class LinkedList03 {
-    /*
-        can not be solved if the node to be deleted is the last node.
-        --> wants you to point that out.
-     */
-
     public static boolean deleteNode(LinkedListNode node) {
+        // can not be solved if the node to be deleted is the last node.
         if (node == null || node.next == null)
             return false;
 
         LinkedListNode next = node.next;
         node.data = next.data;
         node.next = next.next;
+        next.next = null;
 
         return true;
     }
@@ -56,9 +49,10 @@ public class LinkedList03 {
     //--------------------------------------------------------------------------------
     public static void main(String[] args) {
         LinkedListNode head = AssortedMethods.randomLinkedList(10, 0, 10);
-        System.out.println(head.printForward());
+        LinkedListNode target = head.next.next.next.next;   // the 5th node
 
-        deleteNode(head.next.next.next);   // the 4th node
+        System.out.println("Delete the 5th("+ target.data + "): \n" + head.printForward());
+        deleteNode(target);
         System.out.println(head.printForward());
     }
 }
