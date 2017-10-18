@@ -21,7 +21,7 @@ import lib.LinkedListNode;
  */
 public class LinkedList04 {
     //--------------------------------------------------------------------------------
-    // Solution #1. 4 References(beforeStart && beforeEnd, afterStart && afterEnd) && Concatenation
+    // Solution #1. 4 References(beforeStart && beforeEnd, afterStart && afterEnd) && Concatenation && Original Order
     //              - Time Complexity: O(n)
     //              - Space Complexity: O(1)
     //
@@ -71,7 +71,7 @@ public class LinkedList04 {
 
 
     //--------------------------------------------------------------------------------
-    // Solution #2. 2 References (beforeStart, afterStart) && Concatenation
+    // Solution #2. 2 References (beforeStart, afterStart) && Concatenation && Reverse Order
     //              - Time Complexity: O(n + m) --> O(n), where m <= n
     //              - Space Complexity: O(1)
     //              ==> // Order 역순 : 두 리스트 모두 원본 리스트의 역순으로 배열된다.
@@ -114,7 +114,7 @@ public class LinkedList04 {
 
 
     //--------------------------------------------------------------------------------
-    // Solution #3. 2 References (head, tail)
+    // Solution #3. 2 References (head, tail) && Partially Original Order
     //              - Time Complexity: O(n)
     //              - Space Complexity: O(1)
     //              ==> head쪽은 역순, tail쪽은 원래 순서가 유지
