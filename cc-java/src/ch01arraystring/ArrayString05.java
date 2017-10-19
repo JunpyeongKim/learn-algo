@@ -19,9 +19,10 @@ package ch01arraystring;
 public class ArrayString05 {
     //--------------------------------------------------------------------------------
     // Solution #1. Bad: String + charAt()
-    //              - Time Complexity: O(p + k^2)
+    //              - Time Complexity: O(p + k^2) <-- k^2 은 문자열을 합하는 연산 시간
     //                  - p: the size of the original string
     //                  - k: the number of character sequences
+    //                  - e.g., aabccdeeaa --> k == 6
     //--------------------------------------------------------------------------------
     public static String compressBad(String str) {
         if (str == null || str.isEmpty()) {
@@ -74,6 +75,7 @@ public class ArrayString05 {
 
     //--------------------------------------------------------------------------------
     // Solution #2. Better: StringBuilder + charAt()
+    //              - 문자열 합하는 시간(k^2)을 줄이기 위해 StringBuilder/StringBuffer 사용
     //--------------------------------------------------------------------------------
     public static String compressBetter(String str) {
         if (str == null || str.isEmpty()) {
@@ -126,6 +128,7 @@ public class ArrayString05 {
 
     //--------------------------------------------------------------------------------
     // Solution #3. Best: StringBuffer + charAt() + count
+    //              - 문자열 합하는 시간(k^2)을 줄이기 위해 StringBuilder/StringBuffer 사용
     //TODO: Complexity
     //--------------------------------------------------------------------------------
     private static int countCompression(String str) {
@@ -170,6 +173,7 @@ public class ArrayString05 {
 
     //--------------------------------------------------------------------------------
     // Solution #4. Best & Alternative: Array + charAt() + count
+    //              --> 변환 결과 문자열의 길이 계산 --> 배열 이용
     //TODO: Complexity
     //              - Time Complexity: O(n)
     //              - Space Complexity: O(n)

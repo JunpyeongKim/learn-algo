@@ -104,7 +104,7 @@ public class ArrayString01 {
 
     //--------------------------------------------------------------------------------
     // Solution #4: Sorting && Neighboring characters are identical --> One Loop
-    //              - Time Complexity: O(n * log n + n)  --> O(n * log n) ==> O(n)
+    //              - Time Complexity: O(nlog(n) + n)  --> O(nlog(n)) ==> O(n)
     //              - Space Complexity: O(1) <-- No additional data structures
     //--------------------------------------------------------------------------------
     public static boolean isUniqueChars04(String str) {

@@ -20,12 +20,14 @@ public class ArrayString07 {
     // Common
     //--------------------------------------------------------------------------------
     private static void nullifyRow(int[][] matrix, int row) {
+        // Time Complexity: O(N)
         for (int j = 0; j < matrix[0].length; j++) {
             matrix[row][j] = 0;
         }
     }
 
     private static void nullifyColumn(int[][] matrix, int column) {
+        // Time Complexity: O(N)
         for (int i = 0; i < matrix.length; i++) {
             matrix[i][column] = 0;
         }
@@ -34,8 +36,8 @@ public class ArrayString07 {
 
     //--------------------------------------------------------------------------------
     // Solution #1. Buffer --> boolean array or a bit vector
-    //              - Space Complexity: O(M + N --> n)  //TODO: O(N)
-    //              - Time Complexity: M*N + M*N | M*N --> n^2  //TODO:
+    //              - Time Complexity: (M*N + M*N) | M*N --> n^2
+    //              - Space Complexity: O(M + N --> n)
     //--------------------------------------------------------------------------------
     public static void setZeros01(int[][] matrix) {
         boolean[] rows = new boolean[matrix.length];
@@ -52,7 +54,7 @@ public class ArrayString07 {
             }
         }
 
-        // Nullify 01: Time Complexity, O(M + N --> n)    //TODO: M*N + M*N ???
+        // Nullify 01: Time Complexity, O((M*N + M*N) | M*N) --> O(n^2)
         for (int i = 0; i < rows.length; i++) {
             if (rows[i]) {
                 nullifyRow(matrix, i);
@@ -65,7 +67,7 @@ public class ArrayString07 {
             }
         }
 
-        // Nullify 02: Time Complexity, O(n^2)  //TODO: O(M*N --> N^2)
+        // Nullify 02: Time Complexity, O(M*N --> n^2)
         // for (int i = 0; i < matrix.length; i++) {
         //     for (int j = 0; j < matrix[0].length; j++) {
         //         if (rows[i] || columns[j]) {

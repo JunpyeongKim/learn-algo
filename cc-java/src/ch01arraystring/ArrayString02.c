@@ -8,9 +8,14 @@
  #include <stdlib.h>
  #include <stdio.h>
 
-void reverse(char* str) {
+//--------------------------------------------------------------------------------
+// Solution #1: Use memory
+//              - Time Complexity: O(N + N + N) --> O(N)
+//              - Space Complexity: O(N)
+//--------------------------------------------------------------------------------
+void reverse01(char* str) {
     if (str == NULL) {
-        printf("[reverse()] str == NULL\n");
+        printf("[reverse01()] str == NULL\n");
         return;
     }
 
@@ -40,10 +45,33 @@ void reverse(char* str) {
     }
 }
 
+//--------------------------------------------------------------------------------
+// Solution #2: No memory
+//              - Time Complexity: O(N + N/2) --> O(N)
+//              - Space Complexity: O(1)
+//--------------------------------------------------------------------------------
+void reverse02(char* str) {
+    char* end = str;
+    char tmp;
+
+    if (str) {
+        while (*end) {
+            end++;
+        }
+        end--;
+
+        while (str < end) {
+            tmp = *str;
+            *str++ = *end;
+            *end-- = tmp;
+        }
+    }
+}
+
 int is_reverse(char* str, char* rev) {
     // NULL
     if (str == NULL || rev == NULL) {
-        printf("[reverse()] str == NULL || rev == NULL\n");
+        printf("[is_reverse()] str == NULL || rev == NULL\n");
         return 0;
     }
 
@@ -82,14 +110,16 @@ int main() {
     char str_backup[20] = "abcdefg";
     char* null = NULL;
 
-    reverse(str);
+    // reverse01(str);
+    reverse02(str);
     if (is_reverse(str, str_backup)) {
         printf("passed: %s\n", str);
     } else {
         printf("failed: %s\n", str);
     }
 
-    reverse(null);
+    // reverse01(null);
+    reverse02(null);
     if (null == NULL) {
         printf("passed: NULL\n");
     } else {
