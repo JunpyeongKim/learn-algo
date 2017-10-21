@@ -83,8 +83,7 @@ package ch02linkedlist;
 
 // TBD 5
 /**
- * 2.5 연결 리스트로 표현된 두 개의 수가 있다고 하자.
- *     리스트의 각 노드는 해당 수의 자릿수를 표현한다.
+ * 2.5 연결 리스트로 표현된 두 개의 수가 있다고 하자.리스트의 각 노드는 해당 수의 자릿수를 표현한다.
  *     이때 자릿수들은 역순으로 배열되는데, 1의 자릿수가 리스트의 맨 앞에 오도록 배열된다는 뜻이다.
  *     이 두 수를 더하여 그 합을 연결 리스트로 반환하는 함수를 작성하라.
  *
@@ -98,33 +97,30 @@ package ch02linkedlist;
  *          입력: (6->1->7) + (2->9->5), 즉 617 + 295
  *          출력: 9->1->2, 즉 912
  *
- * 2.4 (5E)
- *      You have two numbers represented by a linked list, where each node contains a single digit.
- *      The digits are stored in reverse order, such that the 1’s digit is at the head of the list.
+ * (5E)
+ * 2.4 You have two numbers represented by a linked list, where each node contains a single digit.
+ *     The digits are stored in reverse order, such that the 1’s digit is at the head of the list.
  *     Write a function that adds the two numbers and returns the sum as a linked list.
  *
  *     EXAMPLE
  *      Input: (3 -> 1 -> 5) + (5 -> 9 -> 2)
  *      Output: 8 -> 0 -> 8
  *
- *     FOLLOW UP
- *      Suppose the digits are stored in forward order. Repeat the above problem.
- *      Input: (6 -> 1 -> 7) + (2 -> 9 -> 5). That is, 617 + 295.
- *      Output: 9 - > 1 - > 2. That is, 912.
+ * (6E)
+ * 2.5 Sum Lists: You have two numbers represented by a linked list, where each node contains a single digit.
+ *                The digits are stored in reverse order, such that the 1’s digit is at the head of the list.
+ *                Write a function that adds the two numbers and returns the sum as a linked list.
  *
- * 2.5 (6E) Sum Lists:
- *      You have two numbers represented by a linked list, where each node contains a single digit.
- *      The digits are stored in reverse order, such that the 1’s digit is at the head of the list.
- *     Write a function that adds the two numbers and returns the sum as a linked list.
+ *                EXAMPLE
+ *                  Input: (7 -> 1 -> 6) + (5 -> 9 -> 2). That is, 617 + 295
+ *                  Output: 2 -> 1 -> 9. That is, 912.
  *
- *     EXAMPLE
- *      Input: (7 -> 1 -> 6) + (5 -> 9 -> 2). That is, 617 + 295
- *      Output: 2 -> 1 -> 9. That is, 912.
+ *                FOLLOW UP
+ *                  Suppose the digits are stored in forward order. Repeat the above problem.
+ *                  Input: (6 -> 1 -> 7) + (2 -> 9 -> 5). That is, 617 + 295.
+ *                  Output: 9 -> 1 -> 2. That is, 912.
  *
- *     FOLLOW UP
- *      Suppose the digits are stored in forward order. Repeat the above problem.
- *      Input: (6 -> 1 -> 7) + (2 -> 9 -> 5). That is, 617 + 295.
- *      Output: 9 - > 1 - > 2. That is, 912.
+ *                Hints: #7, #30, #71, #95, #109
  */
 
 // TBD 6
@@ -169,7 +165,7 @@ package ch02linkedlist;
  */
 
 //--------------------------------------------------------------------------------
-// Completed --> KE(7개: 1, 3, 4, - 2, 5, 6, 7), 4E(5개: 1, 3, - 2, 4, 5), 6E(8개: 1, 3, 4, - 2, 5, 6, 7, 8)
+// Completed --> KE(7개: 1, 3, 4, 5, - 2, 6, 7), 4E(5개: 1, 3, 4, - 2, 5), 6E(8개: 1, 3, 4, 5, - 2, 6, 7, 8)
 //--------------------------------------------------------------------------------
 
 /**
