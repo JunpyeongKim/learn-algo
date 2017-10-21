@@ -175,7 +175,7 @@ package ch02linkedlist;
 /**
 Additional Questions:
 
-트리와 그래프(4.4), 객체 지향 섥뎨(8.10), 규모확장성과 메모리 제한(11.7), 중간 난이도 연습문제(17.13)
+트리와 그래프(4.4), 객체 지향 설계(8.10), 규모확장성과 메모리 제한(11.7), 중간 난이도 연습문제(17.13)
 
 (6E)
 Trees and Graphs (#4.3), Object-Oriented Design (#7.12), System Design and Scalability
