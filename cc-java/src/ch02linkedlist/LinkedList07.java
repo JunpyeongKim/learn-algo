@@ -10,7 +10,7 @@ import lib.LinkedListNode;
  *
  *                 Hints: #5, #13, #29, #61, #101
  */
-public class LinkedList07TBD {
+public class LinkedList07 {
     public class Result {
         public LinkedListNode node;
         public boolean result;
