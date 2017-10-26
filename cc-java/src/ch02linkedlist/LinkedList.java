@@ -81,7 +81,7 @@ package ch02linkedlist;
  *                Hints: #3, #24
  */
 
-// TBD 5
+// WIP 5
 /**
  * 2.5 연결 리스트로 표현된 두 개의 수가 있다고 하자.리스트의 각 노드는 해당 수의 자릿수를 표현한다.
  *     이때 자릿수들은 역순으로 배열되는데, 1의 자릿수가 리스트의 맨 앞에 오도록 배열된다는 뜻이다.
@@ -160,8 +160,10 @@ package ch02linkedlist;
 /**
  * 2.7 주어진 연결 리스트가 회문(palindrome)인지 검사하는 함수를 작성하라.
  *
- * 2.6 (6E) Palindrome:
- *      Implement a function to check if a linked list is a palindrome.
+ * (6E)
+ * 2.6 Palindrome: Implement a function to check if a linked list is a palindrome.
+ *
+ *                 Hints: #5, #13, #29, #61, #101
  */
 
 //--------------------------------------------------------------------------------

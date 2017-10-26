@@ -45,6 +45,10 @@ import java.util.Stack;
  *                Hints: #7, #30, #71, #95, #109
  */
 public class LinkedList05 {
+    private static final Boolean FORWARD_ORDER = true;
+    private static final Boolean REVERSE_ORDER = false;
+
+
     public static Integer reverse(LinkedListNode node) {
         Stack<Integer> stack = new Stack<Integer>();
 
@@ -76,7 +80,179 @@ public class LinkedList05 {
         return null;    //TODO:
     }
 
-    public static void main(String[] args) {
+    private static int linkedListToInt(LinkedListNode node, Boolean order) {
+        int value = 0;
 
+        if (order == REVERSE_ORDER) {
+            // Reverse order
+            if (node.next != null) {
+                value = 10 * linkedListToInt(node.next, order);
+            }
+    
+            return node.data + value;
+        } else {
+            // Forward order
+            while (node != null) {
+                value = value * 10 + node.data;
+                node = node.next;
+            }
+
+            return value;
+        }
+    }
+
+
+    //--------------------------------------------------------------------------------
+    // Solution #1: Reverse Order 일 경우 사용 가능한 메소드
+    //--------------------------------------------------------------------------------
+    private static LinkedListNode addLists(LinkedListNode l1, LinkedListNode l2, int carry) {
+        if (l1 == null && l2 == null && carry == 0) {
+            return null;
+        }
+
+        LinkedListNode result = new LinkedListNode();
+        int value = carry;
+
+        if (l1 != null) {
+            value += l1.data;
+        }
+
+        if (l2 != null) {
+            value += l2.data;
+        }
+
+        result.data = value % 10;
+
+        if (l1 != null || l2 != null) {
+            LinkedListNode more = addLists(l1 == null ? null : l1.next, 
+                                            l2 == null ? null : l2.next, 
+                                            value >= 10 ? 1 : 0);
+
+            result.next = more;
+        }
+
+        return result;
+    }
+
+    //--------------------------------------------------------------------------------
+    // Solution #2: Forward Order 일 경우 사용 --> 패딩도 해준다...이유는???
+    //--------------------------------------------------------------------------------
+    private static int length(LinkedListNode l) {
+        if (l == null) {
+            return 0;
+        } else {
+            return 1 + length(l.next);
+        }
+    }
+
+    private static LinkedListNode insertBefore(LinkedListNode list, int data) {
+        LinkedListNode node = new LinkedListNode(data);
+        node.next = list;
+        return node;
+    }
+
+    private static LinkedListNode padList(LinkedListNode l, int padding) {
+        LinkedListNode head = l;
+        
+        for (int i = 0; i < padding; i++) {
+            head = insertBefore(head, 0);
+        }
+
+        return head;
+    }
+
+    static class PartialSum {
+        LinkedListNode sum;
+        int carry;
+    }
+
+    private static PartialSum addListHelper(LinkedListNode l1, LinkedListNode l2) {
+        if (l1 == null && l2 == null) {
+            return new PartialSum();
+        }
+
+        PartialSum sum = addListHelper(l1.next, l2.next);
+
+        int val = sum.carry + l1.data + l2.data;
+
+        LinkedListNode result = insertBefore(sum.sum, val % 10);
+        sum.sum = result;
+        sum.carry = val / 10;
+        return sum;
+    }
+
+    private static LinkedListNode addLists(LinkedListNode l1, LinkedListNode l2) {
+        int len1 = length(l1);
+        int len2 = length(l2);
+
+        if (len1 < len2) {
+            l1 = padList(l1, len2 - len1);
+        } else {
+            l2 = padList(l2, len1 - len2);
+        }
+
+        PartialSum sum = addListHelper(l1, l2);
+        if (sum.carry == 0) {
+            return sum.sum;
+        } else {
+            LinkedListNode result = insertBefore(sum.sum, sum.carry);
+            return result;
+        }
+    }
+
+    //--------------------------------------------------------------------------------
+    // Main
+    //--------------------------------------------------------------------------------
+    public static void main(String[] args) {
+        // Sample 01
+		LinkedListNode lA1 = new LinkedListNode(9, null, null);
+		LinkedListNode lA2 = new LinkedListNode(9, null, lA1);
+		LinkedListNode lA3 = new LinkedListNode(9, null, lA2);
+		
+		LinkedListNode lB1 = new LinkedListNode(1, null, null);
+		LinkedListNode lB2 = new LinkedListNode(0, null, lB1);
+        LinkedListNode lB3 = new LinkedListNode(0, null, lB2);
+        
+        LinkedListNode list3R = addLists(lA1, lB1, 0);
+        LinkedListNode list3F = addLists(lA1, lB1);
+        
+        System.out.println("  " + lA1.printForward());  //   9 -> 9 -> 9 -> NULL		
+        System.out.println("+ " + lB1.printForward());	// + 1 -> 0 -> 0 -> NULL
+        System.out.println("R= " + list3R.printForward());    //
+        System.out.println("F= " + list3F.printForward());    //
+        
+        // Reverse: 999 + 1 = 1000
+        int l1 = linkedListToInt(lA1, REVERSE_ORDER);
+        int l2 = linkedListToInt(lB1, REVERSE_ORDER);
+        int l3 = linkedListToInt(list3R, REVERSE_ORDER);
+        System.out.println("---> R: " + l1 + " + " + l2 + " = " + (l1 + l2) + " equal ? " + l3);
+        
+        // Forward: 999 + 100 = 1099
+        l1 = linkedListToInt(lA1, FORWARD_ORDER);
+        l2 = linkedListToInt(lB1, FORWARD_ORDER);
+        l3 = linkedListToInt(list3F, FORWARD_ORDER);
+        System.out.println("---> F: " + l1 + " + " + l2 + " = " + (l1 + l2) + " equal ? " + l3);
+        
+
+        // Sample 02
+        lA1 = new LinkedListNode(3, null, null);
+		lA2 = new LinkedListNode(1, null, lA1);
+		
+		lB1 = new LinkedListNode(5, null, null);
+		lB2 = new LinkedListNode(9, null, lB1);
+        lB3 = new LinkedListNode(1, null, lB2);
+
+        System.out.println("  " + lA1.printForward());  //   3 -> 1 -> NULL
+        System.out.println("+ " + lB1.printForward());  // + 5 -> 9 -> 1 -> NULL
+        
+        // Reverse: 13 + 195 = 208
+        l1 = linkedListToInt(lA1, REVERSE_ORDER);
+		l2 = linkedListToInt(lB1, REVERSE_ORDER);
+        System.out.println("---> R: " + l1 + " + " + l2 + " = " + (l1 + l2));
+        
+        // Forward: 31 + 591 = 602
+        l1 = linkedListToInt(lA1, FORWARD_ORDER);
+		l2 = linkedListToInt(lB1, FORWARD_ORDER);
+        System.out.println("---> F: " + l1 + " + " + l2 + " = " + (l1 + l2));
     }
 }

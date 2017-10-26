@@ -7,6 +7,14 @@ public class LinkedListNode {
     public LinkedListNode previous;
     public LinkedListNode last;
 
+    public LinkedListNode() {
+
+    }
+    
+    public LinkedListNode(int data) {
+        this.data = data;
+    }
+
     public LinkedListNode(int data, LinkedListNode next, LinkedListNode previous) {
         this.data = data;
         setNext(next);
