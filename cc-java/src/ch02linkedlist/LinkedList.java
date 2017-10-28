@@ -123,7 +123,7 @@ package ch02linkedlist;
  *                Hints: #7, #30, #71, #95, #109
  */
 
-// TBD 6
+// WIP 6
 /**
  * 2.6 순환 연결 리스트 (circular linked list)가 주어졌을 때, 순환되는 부분의 첫 노드를 반환하는 알고리즘을 구하라.
  *      - 정의
@@ -133,7 +133,8 @@ package ch02linkedlist;
  *          입력: A -> B -> C -> D -> E -> C (E의 next 노드가 D 앞에 있는 C로 설정되어 있다.)
  *          출력: C
  *
- * 2.5 (5E) Given a circular linked list,
+ * (4E)
+ * 2.5 Given a circular linked list,
  *     implement an algorithm which returns node at the beginning of the loop.
  *
  *     DEFINITION
@@ -144,19 +145,20 @@ package ch02linkedlist;
  *      Input: A -> B -> C -> D -> E -> C [the same C as earlier]
  *      Output: C
  *
- * 2.8 (6E) Loop Detection:
- *      Given a circular linked list, implement an algorithm that returns the node at the beginning of the loop.
+ * (6E)
+ * 2.8 Loop Detection: Given a circular linked list, 
+ *                     implement an algorithm that returns the node at the beginning of the loop.
  *
- *      DEFINITION
- *          Circular linked list: A (corrupt) linked list in which a node's next pointer points to an earlier node,
- *          so as to make a loop in the linked list.
+ *                     DEFINITION
+ *                      Circular linked list: A (corrupt) linked list in which a node's next pointer points to an earlier node,
+ *                      so as to make a loop in the linked list.
  *
- *      EXAMPLE
- *          Input: A -) B -) C -) 0 -) E - ) C [the same C as earlier]
- *          Output: C
+ *                     EXAMPLE
+ *                      Input: A -> B -> C -> D -> E -> C [the same C as earlier]
+ *                      Output: C
  */
 
-// TBD 7
+// WIP 7
 /**
  * 2.7 주어진 연결 리스트가 회문(palindrome)인지 검사하는 함수를 작성하라.
  *
@@ -167,7 +169,7 @@ package ch02linkedlist;
  */
 
 //--------------------------------------------------------------------------------
-// Completed --> KE(7개: 1, 3, 4, 5, - 2, 6, 7), 4E(5개: 1, 3, 4, - 2, 5), 6E(8개: 1, 3, 4, 5, - 2, 6, 7, 8)
+// Completed --> KE(7개: 1, 3, 4, 5, 6, 7 - 2), 4E(5개: 1, 3, 4, 5 - 2), 6E(8개: 1, 3, 4, 5, 6, 8 - 2, 7)
 //--------------------------------------------------------------------------------
 
 /**

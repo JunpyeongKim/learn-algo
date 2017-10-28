@@ -14,7 +14,8 @@ import java.util.Set;
  *          입력: A -> B -> C -> D -> E -> C (E의 next 노드가 D 앞에 있는 C로 설정되어 있다.)
  *          출력: C
  *
- * 2.5 (5E) Given a circular linked list,
+ * (4E)
+ * 2.5 Given a circular linked list,
  *     implement an algorithm which returns node at the beginning of the loop.
  *
  *     DEFINITION
@@ -25,18 +26,19 @@ import java.util.Set;
  *      Input: A -> B -> C -> D -> E -> C [the same C as earlier]
  *      Output: C
  *
- * 2.8 (6E) Loop Detection:
- *      Given a circular linked list, implement an algorithm that returns the node at the beginning of the loop.
+ * (6E)
+ * 2.8 Loop Detection: Given a circular linked list, 
+ *                     implement an algorithm that returns the node at the beginning of the loop.
  *
- *      DEFINITION
- *          Circular linked list: A (corrupt) linked list in which a node's next pointer points to an earlier node,
- *          so as to make a loop in the linked list.
+ *                     DEFINITION
+ *                      Circular linked list: A (corrupt) linked list in which a node's next pointer points to an earlier node,
+ *                      so as to make a loop in the linked list.
  *
- *      EXAMPLE
- *          Input: A -) B -) C -) 0 -) E - ) C [the same C as earlier]
- *          Output: C
+ *                     EXAMPLE
+ *                      Input: A -> B -> C -> D -> E -> C [the same C as earlier]
+ *                      Output: C
  */
-public class LinkedList06TBD {
+public class LinkedList06 {
 
     //TODO:
     public static LinkedListNode findBeginning(LinkedListNode head) {
