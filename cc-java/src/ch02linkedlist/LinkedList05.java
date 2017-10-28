@@ -162,8 +162,8 @@ public class LinkedList05 {
     }
 
     static class PartialSum {
-        LinkedListNode sum;
-        int carry;
+        public LinkedListNode sum;
+        public int carry;
     }
 
     private static PartialSum addListHelper(LinkedListNode l1, LinkedListNode l2) {
@@ -174,8 +174,8 @@ public class LinkedList05 {
         PartialSum sum = addListHelper(l1.next, l2.next);
 
         int val = sum.carry + l1.data + l2.data;
-
         LinkedListNode result = insertBefore(sum.sum, val % 10);
+
         sum.sum = result;
         sum.carry = val / 10;
         return sum;
