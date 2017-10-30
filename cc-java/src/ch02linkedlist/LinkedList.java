@@ -26,12 +26,13 @@ package ch02linkedlist;
 /**
  * 2.2 단방향 연결 리스트에서, 뒤에서 k번째 원소를 찾는 알고리즘을 구현하라.
  *
- * 2.2 (5E)
- *      Implement an algorithm to find the nth to last element of a singly linked list.
+ * (4E)
+ * 2.2 Implement an algorithm to find the nth to last element of a singly linked list.
  *
- * 2.2 (6E) Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
+ * (6E)
+ * 2.2 Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
  *
- *                              Hints: #8, #25, #47, #67, # 726
+ *                         Hints: #8, #25, #47, #67, # 726
  */
 
 // Done 3

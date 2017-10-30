@@ -6,14 +6,15 @@ import lib.LinkedListNode;
 /**
  * 2.2 단방향 연결 리스트에서, 뒤에서 k번째 원소를 찾는 알고리즘을 구현하라.
  *
- * 2.2 (5E)
- *      Implement an algorithm to find the nth to last element of a singly linked list.
+ * (4E)
+ * 2.2 Implement an algorithm to find the nth to last element of a singly linked list.
  *
- * 2.2 (6E) Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
+ * (6E)
+ * 2.2 Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
  *
- *                              Hints: #8, #25, #47, #67, # 726
+ *                         Hints: #8, #25, #47, #67, # 726
  */
-public class LinkedList02TBD {
+public class LinkedList02 {
 
     public static LinkedListNode nthToLast01(LinkedListNode head, int n) {
         //TODO:
@@ -42,9 +43,9 @@ public class LinkedList02TBD {
         if (head == null)
             return 0;
 
-        int index = printKthToLast(head.getNext(), k) + 1;
+        int index = printKthToLast(head.next, k) + 1;
         if (index == k) {
-            System.out.println(k + "th to last node is " + head.getData());
+            System.out.println(k + "th to last node is " + head.data);
         }
 
         return index;

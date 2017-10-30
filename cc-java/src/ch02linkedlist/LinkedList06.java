@@ -42,18 +42,24 @@ public class LinkedList06 {
 
     //TODO:
     public static LinkedListNode findBeginning(LinkedListNode head) {
-        LinkedListNode slow = head; // slow runner
-        LinkedListNode fast = head; // fast runner
+        LinkedListNode slow = head; // Slow runner
+        LinkedListNode fast = head; // Fast runner
 
         if (fast == null || fast.next == null)
             return null;
 
+        // Find
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
 
             if (slow == fast)
                 break;
+        }
+
+        // Check error
+        if (fast == null || fast.next == null) {
+            return null;
         }
 
         slow = head;
@@ -83,9 +89,21 @@ public class LinkedList06 {
     }
 
 
+    //--------------------------------------------------------------------------------
+    // Main
+    //--------------------------------------------------------------------------------
     public static void main(String[] args) {
         int list_length = 100;
         LinkedListNode[] nodes = new LinkedListNode[list_length];
+
+        // Create list
+        for (int i = 0; i < list_length; i++) {
+            nodes[i] = new LinkedListNode(i, null, i > 0 ? nodes[i-1] : null);
+        }
+
+        // Create loop
+        int k = 10;
+        nodes[list_length - 1].next = nodes[list_length - k];
 
         LinkedListNode loop = findBeginning(nodes[0]);
         if (loop == null) {
