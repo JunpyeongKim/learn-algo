@@ -18,35 +18,20 @@ import java.util.Stack;
  *                returns the minimum element?
  *                Push, pop and min should all operate in O(1) time.
  *
- *                  Hints: #27, #59, #78
- */
-
-/**
- * Java 가 제공하는 기본 Stack 기능을 확장하여 2가지 방법 존재
- *  1) min 값 전용 스택을 내부에서 관리 --> 총 2개의 스택 이용 --> space 소비 --> 그러나 일반적으로 2)번 보다 공간소비는 적을수 있다.
- *  2) 스택은 하나 사용하나, 모든 Element가 min 값을 가지도록 한다 --> 역시 space 소비
+ *                Hints: #27, #59, #78
  */
 public class StackQueue02 {
-    /**
-     * The thing with minimum is that they don't change very often.
-     * We can implement this by having each node in the stack keep track of the minimum beneath itself.
-     */
-
     //--------------------------------------------------------------------------------
-    // Solution #1: To have a single int value, minValue,
-    //              that's a member of the Stack class.
-    //              --> When minValue is popped from the stack,
-    //                  we search through the stack to find the new minimum.
-    //                  Unfortunately, this would break the constraint that
-    //                  push and pop operate in O(1) time
+    // Solution #0: To have a single int value, minValue, that's a member of the Stack class.
+    //              --> When minValue is popped from the stack, we search through the stack to find the new minimum.
+    //                  Unfortunately, this would break the constraint that push and pop operate in O(1) time
     //--------------------------------------------------------------------------------
 
 
     //--------------------------------------------------------------------------------
-    // Solution #2: Keeping track of the min for every single element.
+    // Solution #1: Keeping track of the min for every single element.
     //              --> If we have a large stack, we waste a lot of space.
     //--------------------------------------------------------------------------------
-    // New Element Type
     public static class NodeWithMin {
         public int value;
         public int min;
@@ -59,8 +44,7 @@ public class StackQueue02 {
 
     public static class StackWithMin01 extends Stack<NodeWithMin> {
         public void push(int value) {
-//            int newMin = value < min() ? value : min();
-            int newMin = Math.min(value, min());
+            int newMin = Math.min(value, min());    // value < min() ? value : min();
 
             super.push(new NodeWithMin(value, newMin));
         }
@@ -76,10 +60,9 @@ public class StackQueue02 {
 
 
     //--------------------------------------------------------------------------------
-    // Solution #3: Using an additional stack which keeps track of the mins.
+    // Solution #2: Using an additional stack which keeps track of the mins.
     //              --> this might be more space efficient.
     //--------------------------------------------------------------------------------
-    // Additional Stack
     public static class StackWithMin02 extends Stack<Integer> {
         private Stack<Integer> minStack;
 
@@ -88,10 +71,6 @@ public class StackQueue02 {
         }
 
         public void push(int value) {
-//            if (isFull()) {
-//                throw OverflowException();
-//            }
-
             if (value <= min())
                 minStack.push(value);
 
@@ -99,10 +78,6 @@ public class StackQueue02 {
         }
 
         public Integer pop() {
-//            if (isEmpty()) {
-//                throw UnderflowException();
-//            }
-
             int value = super.pop();
             if (value == min())
                 minStack.pop();
@@ -110,7 +85,7 @@ public class StackQueue02 {
             return value;
         }
 
-        public Integer min() {
+        public int min() {
             if (isEmpty()) {
                 return Integer.MAX_VALUE;
             }
@@ -120,39 +95,54 @@ public class StackQueue02 {
     }
 
 
+    //--------------------------------------------------------------------------------
+    // Main
+    //--------------------------------------------------------------------------------
     public static void main(String[] args) {
-        StackWithMin01 stack01 = new StackWithMin01();
-        StackWithMin02 stack02 = new StackWithMin02();
+        StackWithMin01 stack01 = new StackWithMin01();  // NodeWithMain
+        StackWithMin02 stack02 = new StackWithMin02();  // Another Stack
 
-        // Alternative 1
-        //  - push (5 - 6 - 3 - 7)
-        //  - pop() - pop()
+        // Sample 01
+        int[] array = {2, 1, 3, 1};
 
-        // Alternative 2
-        for (int i = 0; i < 15; i++) {
-            int value = AssortedMethods.randomIntInRange(0, 100);
+        System.out.print("Sample01: Bottom ---> ");
+        for (int i = 0; i < array.length; i++) {
+            int value = array[i];
+
             stack01.push(value);
             stack02.push(value);
-            System.out.print(value + ", ");
-        }
-        System.out.println();
 
-        for (int i = 0; i < 15; i++) {
+            System.out.print(value);
+            if (i != array.length - 1)
+                System.out.print(", ");
+        }
+        System.out.println(" <--- Top");
+
+        for (int i = 0; i < array.length; i++) {
+            System.out.println("----------------");
+            System.out.println("Old min: " + stack01.min() + ", " + stack02.min());
             System.out.println("Popped: " + stack01.pop().value + ", " + stack02.pop());
             System.out.println("New min: " + stack01.min() + ", " + stack02.min());
         }
 
-        // Alternative 3
-        int[] array = {2, 1, 3, 1};
 
-        for (int value : array) {
+        // Sample 02
+        System.out.println();
+        System.out.print("Sample02: Bottom ---> ");
+        for (int i = 0; i < 15; i++) {
+            int value = AssortedMethods.randomIntInRange(0, 100);
             stack01.push(value);
             stack02.push(value);
-            System.out.print(value + ", ");
-        }
-        System.out.println();
 
-        for (int i = 0; i < array.length; i++) {
+            System.out.print(value);
+            if (i != 15 - 1)
+                System.out.print(", ");
+        }
+        System.out.println(" <--- Top");
+
+        for (int i = 0; i < 15; i++) {
+            System.out.println("----------------");
+            System.out.println("Old min: " + stack01.min() + ", " + stack02.min());
             System.out.println("Popped: " + stack01.pop().value + ", " + stack02.pop());
             System.out.println("New min: " + stack01.min() + ", " + stack02.min());
         }
