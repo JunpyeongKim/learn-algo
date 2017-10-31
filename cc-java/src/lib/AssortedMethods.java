@@ -4,6 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class AssortedMethods {
+    //
+    // Random numbers
+    //
     public static int randomInt(int n) {
         return (int) (Math.random() * n);
     }
@@ -81,11 +84,14 @@ public class AssortedMethods {
     //--------------------------------------------------------------------------------
     // Array
     //--------------------------------------------------------------------------------
-    public static String arrayToString(int[] array, int start, int end) {
+    private static String arrayToString(int[] array, int start, int end) {
         StringBuilder sb = new StringBuilder();
 
         for (int i = start; i <= end; i++) {
-            sb.append(array[i] + ", ");
+            sb.append(array[i]);
+            if (i != end) {
+                sb.append(", ");
+            }
         }
 
         return sb.toString();

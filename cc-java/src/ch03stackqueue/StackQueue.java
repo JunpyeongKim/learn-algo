@@ -1,5 +1,21 @@
 package ch03stackqueue;
 
+// WIP 1 ---> //TODO:DynamicMultiStack
+/**
+ * 3.1 하나의 배열을 사용하여 세 개의 스택을 구현하는 방법을 설명하라.
+ *
+ * (4E)
+ * 3.1 Describe how you could use a single array to implement three stacks.
+ * 
+ * (6E)
+ * 3.1 Three in One: Describe how you could use a single array to implement three stacks.
+ *
+ *                  Hint #2.
+ *                  Hint #12.
+ *                  Hint #38.
+ *                  Hint #58.
+ */
+
 // Done 2
 /**
  * 3.2 push와 pop의 두 가지 연산뿐 아니라, 최소값을 갖는 원소를 반환하는 min 연산을 갖춘 스택은 어떻게 구현할 수 있겠는가?
@@ -112,21 +128,19 @@ package ch03stackqueue;
 
 
 //--------------------------------------------------------------------------------
-// Korean Edition: Unsolved --> 1, 4
+// Completed --> KE(7개: 1, - 2, 3, 4, 5, 6, 7), 4E(6개: 1, - 2, 3, 4, 5, 6), 6E(6개: 1, - 2, 3, 4, 5, 6)
 //--------------------------------------------------------------------------------
-
-// TBD 1
-/**
- * 3.1
- */
 
 // TBD 4
 /**
- * 3.4
+ * 3.4 유명한 하노이 탑
  */
 
 //--------------------------------------------------------------------------------
-// English Edition: Unsolved --> 4E(), 6E()
+// 연결리스트(2.7), 수학과 확률(7.7)  
+//
+// (6E)
+// Additional Questions: Linked Lists (#2.6), Moderate Problems (#16.26), Hard Problems (#17.9).
 //--------------------------------------------------------------------------------
 public class StackQueue {
 }
