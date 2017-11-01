@@ -17,15 +17,10 @@ import java.util.Stack;
  *
  *                       Hints: #98, #114
  */
-
-/**
- * Queue는 rear 에서 enqueue, front에서 dequeue 가 일어나므로 각 스택은 한가지 목적으로만 사용한다.
- * 그리고, 스택을 두번 거치면 FIFO 이 되므로 조건에도 부합된다.
- * 단, peek, dequeue 일때는 front 가 empty 인지 여부를 체크후 --> rear 에서 front 로 데이터를 옮길후 연산을 한다.
- */
 public class StackQueue05 {
     private static class MyQueue<T> {
-        Stack<T> stackRear, stackFront;
+        private Stack<T> stackRear;
+        private Stack<T> stackFront;
 
         public MyQueue() {
             stackRear = new Stack<T>();
@@ -48,37 +43,48 @@ public class StackQueue05 {
             }
         }
 
-        public T peek() {
-            shiftStacks();
-            return stackFront.peek();
-        }
-
         public T remove() {
             shiftStacks();
             return stackFront.pop();
+        }
+
+        public T peek() {
+            shiftStacks();
+            return stackFront.peek();
         }
     }
 
 
     //--------------------------------------------------------------------------------
+    // Main
+    //--------------------------------------------------------------------------------
     public static void main(String[] args) {
         MyQueue<Integer> myQueue = new MyQueue<Integer>();
-
         Queue<Integer> testQueue = new LinkedList<Integer>();
 
         for (int i = 0; i < 100; i++) {
             int choice = AssortedMethods.randomIntInRange(0, 10);
 
             if (choice <= 5) {
-
+                int element = AssortedMethods.randomIntInRange(1, 10);
+                testQueue.add(element);
+                myQueue.add(element);
+                System.out.println("#" + i + " Enqueued " + element);
             } else if (testQueue.size() > 0) {
-
+                int top1 = testQueue.remove();
+                int top2 = myQueue.remove();
+                if (top1 != top2) {
+                    System.out.println("******* FAILURE - DIFFERENT TOPS: " + top1 + ", " + top2);
+                }
+                System.out.println("#" + i + " Dequeued " + top1);
             }
 
             if (testQueue.size() == myQueue.size()) {
-                //
+                if (testQueue.size() > 0 && testQueue.peek() != myQueue.peek()) {
+                    System.out.println("******* FAILURE - DIFFERENT TOPS: " + testQueue.peek() + ", " + myQueue.peek() + " ******");
+                }
             } else {
-                //
+                System.out.println("******* FAILURE - DIFFERENT SIZES ******");
             }
         }
     }
