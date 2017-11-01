@@ -3,10 +3,10 @@ package ch03stackqueue;
 import java.util.ArrayList;
 
 /**
- * 3.3 접시 무더기를 떠올려 보자.
- *     접시를 너무 높이 쌓으면, 넘어질 것이다.
+ * 3.3 접시 무더기를 떠올려 보자. 접시를 너무 높이 쌓으면, 넘어질 것이다. 
  *     그러므로 현실에서는 무더기 높이가 특정한 수준 이상으로 높아지면 새로운 무더기를 만든다.
  *     이것을 흉내내는 자료구조 SetOfStacks 를 구현해 보라.
+ * 
  *     SetOfStacks 는 여러 스택으로 구성되어야 하며, 이전 스택이 지정된 용량을 초과하는 경우 새로운 스택을 생성해야 한다.
  *     SetOfStacks.push() 와 SetOfStacks.pop() 은 스택이 하나인 경우와 동일하게 동작해야 한다.
  *     (다시 말해, pop() 은 정확히 하나의 스택이 있을 때와 동일한 값을 반환해야 한다).
@@ -40,9 +40,9 @@ import java.util.ArrayList;
  */
 public class StackQueue03 {
     private static class Node<T> {
-        public Node<T> above;
-        public Node<T> below;
         public T value;
+        public Node<T> above;   // for popAt()
+        public Node<T> below;   // for popAt()
 
         public Node(T v) {
             value = v;
@@ -50,13 +50,13 @@ public class StackQueue03 {
     }
 
     private static class Stack<T> {
-        private Node<T> top;
-        private Node<T> bottom;
         private int capacity;
         private int size;
+        private Node<T> top;
+        private Node<T> bottom;
 
-        public Stack(int cap) {
-            capacity = cap;
+        public Stack(int capacity) {
+            this.capacity = capacity;
             size = 0;
         }
 
@@ -81,6 +81,7 @@ public class StackQueue03 {
             size++;
             Node<T> n = new Node<T>(v);
 
+            // for popAt()
             join(n, top);
             top = n;
 
@@ -90,30 +91,33 @@ public class StackQueue03 {
 
             return true;
         }
-        public T pop() {
+
+        public T pop() throws EmptyStackException {
             if (isEmpty()) {    // or top == null
-                return null;    // or throw EmptyStackException();
+                throw new EmptyStackException();
             }
 
             size--;
             T v = top.value;
 
+            // for popAt()
             Node<T> newTop = top.below;
             top.below = null;
-            newTop.above = null;
+            if (newTop != null)
+                newTop.above = null;
             top = newTop;
 
             return v;
         }
 
-        public T bottom() {
+        public T removeBottom() throws EmptyStackException {
             if (isEmpty()) {
-                return null;    // or throw EmptyStackException();
+                throw new EmptyStackException();
             }
 
-            Node<T> tmp = bottom;
-
             size--;
+
+            Node<T> tmp = bottom;
             bottom = bottom.above;
             if (bottom != null) {
                 bottom.below = null;
@@ -126,30 +130,32 @@ public class StackQueue03 {
 
     private static class SetOfStacks<T> {
         private ArrayList<Stack<T>> stacks;
-        private int capacity;
+        private int capacity;   // threshold
 
+        // Constructor
         public SetOfStacks(int capacity) {
             stacks = new ArrayList<Stack<T>>();
             this.capacity = capacity;
         }
 
+        // Private API
         private Stack<T> getLastStack() {
-            if (stacks.size() == 0) {
+            int stackSize = stacks.size();
+
+            if (stackSize == 0) {
                 return null;
             }
 
-            return stacks.get(stacks.size() - 1);
+            return stacks.get(stackSize - 1);
         }
 
-        //
+        // Public API
         public boolean isEmpty() {
             Stack<T> last = getLastStack();
 
-            // (stacks.size() == 0 || last == null)
             return last == null || (stacks.size() == 1 && last.isEmpty());
         }
 
-        //
         public void push(T v) {
             Stack<T> last = getLastStack();
 
@@ -162,10 +168,9 @@ public class StackQueue03 {
             }
         }
 
-        //
-        public T pop() {
+        public T pop() throws EmptyStackException {
             if (isEmpty()) {
-                return null;    // or throws EmptyStackException();
+                throw new EmptyStackException();
             }
 
             Stack<T> last = getLastStack();
@@ -178,32 +183,33 @@ public class StackQueue03 {
             return v;
         }
 
-        //
-        private T leftShift(int index, boolean removeTop) {
+        // Additional Public API
+        private T leftShift(int index, boolean removeTop) throws IndexOutOfBoundsException {
             Stack<T> stack = stacks.get(index);
 
             if (stack == null) {
-                return null;    // or throw IndexOutOfBoundException();
+                throw new IndexOutOfBoundsException();
             }
 
-            T removedItem;
-            if (removeTop) {
-                removedItem = stack.pop();
-            } else {
-                removedItem = stack.bottom();
-            }
+            T removedItem = null;
 
-            if (stack.isEmpty()) {
-                stacks.remove(index);
-            } else if (index + 1 < stacks.size()){
-                T v = leftShift(index + 1, false);
-                stack.push(v);
+            try {
+                removedItem = removeTop ? stack.pop() : stack.removeBottom();            
+
+                if (stack.isEmpty()) {
+                    stacks.remove(index);
+                } else if (index + 1 < stacks.size()) { // right before the last stack
+                    T v = leftShift(index + 1, false);
+                    stack.push(v);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
             return removedItem;
         }
 
-        public T pop(int index) {
+        public T popAt(int index) throws IndexOutOfBoundsException {
             return leftShift(index, true);
         }
     }
@@ -213,14 +219,24 @@ public class StackQueue03 {
     // Main
     //--------------------------------------------------------------------------------
     public static void main(String[] args) {
-        SetOfStacks set = new SetOfStacks(5);
+        int capacityPerStack = 5;   // threshold
+        SetOfStacks set = new SetOfStacks(capacityPerStack);
 
+        // Push
         for (int i = 0; i < 34; i++) {
             set.push(i);
         }
 
-        for (int i = 0; i < 35; i++) {
-            set.pop();
+        // PopAt
+        System.out.println("popAt(1): " + set.popAt(1));    // 9
+
+        // Pop
+        try{
+            for (int i = 0; i < 35; i++) {
+                System.out.println("Popped #" + i + ": " + set.pop());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
