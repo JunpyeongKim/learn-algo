@@ -118,6 +118,34 @@ package ch04treegraph;
  *                         Can you implement this recursive function and properly adjust these ranges as you traverse the tree?
  */
 
+// TBD 6
+/**
+ * 4.6 정순회 기준으로, 이진 탐색 트리 내의 한 노드가 주어지면 그 노드의 '다음' 노드를 찾아내는 알고리즘을 작성하라.
+ *     각 노드에는 부모 노드를 가리키는 링크가 존재한다고 가정한다.
+ */
+
+// TBD 7
+/**
+ * 4.7 이진 트리 내의 두 노드의 공통 선조(ancestor) 노드를 찾는 알고리즘을 설계하고 구현하라.
+ *     자료구조 내에 부가적인 노드를 저장해 두는 일은 금한다.
+ *
+ *     주의: 이진 탐색 트리가 아닐 수도 있다.
+ *
+ * (4E)
+ * 4.6 Design an algorithm and write code to find the first common ancestor of two nodes in a binary tree.
+ *     Avoid storing additional nodes in a data structure.
+ *
+ *     NOTE: This is not necessarily a binary search tree.
+ *
+ * (6E)
+ * 4.8 First Common Ancestor: Design an algorithm and write code to find the first common ancestor of two nodes in a binary tree.
+ *                            Avoid storing additional nodes in a data structure.
+ *
+ *                            NOTE: This is not necessarily a binary search tree.
+ *
+ *                            Hints: # 10, #16, #28, #36, #46, #70, #80, #96
+ */
+
 // WIP 8
 /**
  * 4.8 두 개의 큰 이진 트리 T1, T2가 있다고 하자.
@@ -160,36 +188,8 @@ package ch04treegraph;
  */
 
 
-//--------------------------------------------------------------------------------
-// Korean Edition: Unsolved --> 6, 7, 9
-//--------------------------------------------------------------------------------
-// TBD 6
-/**
- * 4.6 정순회 기준으로, 이진 탐색 트리 내의 한 노드가 주어지면 그 노드의 '다음' 노드를 찾아내는 알고리즘을 작성하라.
- *     각 노드에는 부모 노드를 가리키는 링크가 존재한다고 가정한다.
- */
 
-// TBD 7
-/**
- * 4.7 이진 트리 내의 두 노드의 공통 선조(ancestor) 노드를 찾는 알고리즘을 설계하고 구현하라.
- *     자료구조 내에 부가적인 노드를 저장해 두는 일은 금한다.
- *
- *     주의: 이진 탐색 트리가 아닐 수도 있다.
- *
- * (4E)
- * 4.6 Design an algorithm and write code to find the first common ancestor of two nodes in a binary tree.
- *     Avoid storing additional nodes in a data structure.
- *
- *     NOTE: This is not necessarily a binary search tree.
- *
- * (6E)
- * 4.8 First Common Ancestor: Design an algorithm and write code to find the first common ancestor of two nodes in a binary tree.
- *                            Avoid storing additional nodes in a data structure.
- *
- *                            NOTE: This is not necessarily a binary search tree.
- *
- *                            Hints: # 10, #16, #28, #36, #46, #70, #80, #96
- */
+
 
 // TDB 9
 /**
@@ -197,8 +197,10 @@ package ch04treegraph;
  *     어떤 경로의 값은 그 경로에 포함된 모든 노드의 값의 합이며, 경로는 트리 내의 아무 위치에서나 시작하고 끝날수 있다.
  */
 
-
 //--------------------------------------------------------------------------------
-// English Edition: Unsolved --> 4E(5, 6,8), 6E(6, 7, 8, 9, 11, 12)
+// Completed 
+// --> KE(9개: 1, - 2, 3, 4, 5, 6, 7, 8, 9)
+// --> 4E(8개: 1, - 2, 3, 4, 5, 6, 7, 8)
+// --> 6E(12개: 4, - 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12)
 //--------------------------------------------------------------------------------
 public class TreeGraph {}

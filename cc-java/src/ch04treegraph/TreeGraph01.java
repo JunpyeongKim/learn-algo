@@ -33,12 +33,11 @@ import lib.TreeNode;
  *                           both the height computation and the balance check.
  *                           An integer return value can be used to indicate both.
  */
-
 public class TreeGraph01 {
     /**
      * a balanced tree
-     *  - no two leaf nodes differ in distance from root by more than one
-     *  - the heights of the two subtrees of any node never differ by more than one.
+     * --> no two leaf nodes differ in distance from root by more than one
+     * --> the heights of the two subtrees of any node never differ by more than one.
      */
 
 
@@ -57,7 +56,7 @@ public class TreeGraph01 {
     // Although this works, it's not very efficient.
     // On each node, getHeight() is called repeatedly on the same nodes.
     // O(N log N)
-    public static boolean isBalancedBruteForce(TreeNode root) {
+    public static boolean isBalanced01(TreeNode root) {
         if (root == null) {
             return true;
         }
@@ -67,30 +66,32 @@ public class TreeGraph01 {
             return false;
         } else {
             // Recurse
-            return isBalancedBruteForce(root.left) && isBalancedBruteForce(root.right);
+            return isBalanced01(root.left) && isBalanced01(root.right);
         }
     }
 
     //--------------------------------------------------------------------------------
     // Solution #2: Improved
+    //              --> the tree height >= -1
     //--------------------------------------------------------------------------------
     public static int checkHeight(TreeNode node) {
         if (node == null) {
             return -1;  // the height of a null tree is generally defined to be -1.
         }
 
-        // left
+        // Left subtree
         int leftHeight = checkHeight(node.left);
         if (leftHeight == Integer.MIN_VALUE) {
             return Integer.MIN_VALUE;   // an error code
         }
 
-        // right
+        // Right subtree
         int rightHeight = checkHeight(node.right);
         if (rightHeight == Integer.MIN_VALUE) {
             return Integer.MIN_VALUE;   // an error code
         }
 
+        // Difference 
         int heightDiff = Math.abs(leftHeight - rightHeight);
         if (heightDiff > 1) {
             return Integer.MIN_VALUE;   // an error code
@@ -102,7 +103,7 @@ public class TreeGraph01 {
     // if the subtree is balanced, the checkHeight() will return the actual height of the subtree.
     // if not balanced, will return an error code.
     // O(N) time, O(H) space
-    public static boolean isBalancedImproved(TreeNode root) {
+    public static boolean isBalanced02(TreeNode root) {
         return Integer.MIN_VALUE != checkHeight(root);
     }
 
@@ -111,25 +112,20 @@ public class TreeGraph01 {
     // Main
     //--------------------------------------------------------------------------------
     public static void main(String[] args) {
-        //--------------------------------------------------------------------------------
         // Balanced Tree
-        //--------------------------------------------------------------------------------
         int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         TreeNode root = TreeNode.createMinimalBST(array);
 
         System.out.println("Root(" + root.data + ") is balanced?");
-        System.out.println("\tBruteForce(" + isBalancedBruteForce(root) + "), Improved(" + isBalancedImproved(root) + ")");
+        System.out.println("\tBruteForce(" + isBalanced01(root) + "), Improved(" + isBalanced02(root) + ")");
 
-
-        //--------------------------------------------------------------------------------
         // Unbalanced Tree
-        //--------------------------------------------------------------------------------
         TreeNode unbalanced = new TreeNode(10);
         for (int i = 0; i < 10; i++) {
             unbalanced.insertInOrder(AssortedMethods.randomIntInRange(0, 100));
         }
 
         System.out.println("Root(" + unbalanced.data + ") is balanced?");
-        System.out.println("\tBruteForce(" + isBalancedBruteForce(unbalanced) + "), Improved(" + isBalancedImproved(unbalanced) + ")");
+        System.out.println("\tBruteForce(" + isBalanced01(unbalanced) + "), Improved(" + isBalanced02(unbalanced) + ")");
     }
 }

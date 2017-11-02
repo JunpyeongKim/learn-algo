@@ -71,6 +71,9 @@ public class TreeNode {
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
+    
+    //--------------------------------------------------------------------------------
+    // Utility
     //--------------------------------------------------------------------------------
     private static TreeNode createMinimalBST(int[] array, int start, int end) {
         if (end < start)
