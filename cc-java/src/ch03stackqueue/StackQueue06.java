@@ -10,7 +10,7 @@ import java.util.Stack;
  *     스택은 push, pop, peek, isEmpty 의 네 가지 연산을 제공한다.
  *
  * (4E)
- * 3.6 Write a program to sort a stack in ascending order.
+ * 3.6 Write a program to sort a stack in ORDER_BY.ASCending order.
  *     You should not make any assumptions about how the stack is implemented.
  *     The following are the only functions that should be used to write this program: push | pop | peek | isEmpty.
  *
@@ -22,33 +22,32 @@ import java.util.Stack;
  *
  *                 Hints: #15, #32, #43
  */
-
-/**
- * 추가 스택을 사용하면 ASC 를 원할 경우는 DESC로 정렬하고, DESC 를 원하면 ASC로 정렬하면된다.
- * --> mergeSort()의 경우 리버스를 하지 않고 원래 로직에서 ASC, DESC 원래 요구대로 정렬후 inStack 리턴해줘도 좋을 것같다.
- *
- *  1) 스택 하나를 사용할 경우 여러번의 푸시/팝 필요
- *  2) mergeSort 를 사용하면 여러개의 callstack과 callstack수 * 2개의 추가스택 만큼의 스택수가 필요하나 스택 리버스가 필요없을 수도 있다.
- */
 public class StackQueue06 {
-    // Ascending Order: The biggest items are on the top.
-    // Descending Order: The smallest items are on the top.
+    private enum ORDER_BY {
+        ASC,    // The biggest items are on the top.
+        DESC    // The smallest items are on the top.
+    }
 
-    public static void sort(Stack<Integer> s, boolean isAscending) {
+    //--------------------------------------------------------------------------------
+    // Solution #1: Using another stack
+    //              --> 여러 번의 push/pop 필요
+    //--------------------------------------------------------------------------------
+    public static void sort(Stack<Integer> s, ORDER_BY orderBy) {
         Stack<Integer> t = new Stack<Integer>();
+        // StringBuffer sb = new StringBuffer();
 
+        // Sort
         while (!s.isEmpty()) {
             int data = s.pop();
 
-            if (isAscending) { // ASC
-
-                // DESC
+            if (ORDER_BY.ASC.equals(orderBy)) {
+                // for the biggest items in order to be at the bottom. 
+                // --> opposite order, in other words, Descending order
                 while (!t.isEmpty() && t.peek() < data) {
                     s.push(t.pop());
                 }
-            } else {    // DESC
-
-                // ASC
+            } else {
+                // sort in ORDER_BY.ASCending order <-- for the smallest items in order to be at the bottome.
                 while (!t.isEmpty() && t.peek() > data) {
                     s.push(t.pop());
                 }
@@ -59,11 +58,18 @@ public class StackQueue06 {
 
         // Reverse
         while (!t.isEmpty()) {
-            s.push(t.pop());
+            int value = t.pop();
+            s.push(value);
         }
     }
 
-    public static Stack<Integer> mergeSort(Stack<Integer> inStack, boolean isAscending) {
+
+    //--------------------------------------------------------------------------------
+    // Solution #2: Using the Merge sort
+    //              --> 2^n 개의 Element 가 존재하면 --> 최소 n개의 callstack 필요
+    //              --> 이 경우, 추가 스택은 2^1 + 2^2 + ... 2^n 개 --> 거의 n^2 개 스택 필요
+    //--------------------------------------------------------------------------------
+    public static Stack<Integer> mergeSort(Stack<Integer> inStack, ORDER_BY orderBy) {
         if (inStack.size() <= 1) {
             return inStack;
         }
@@ -83,8 +89,9 @@ public class StackQueue06 {
         }
 
         // Conquer
-        left = mergeSort(left, isAscending);
-        right = mergeSort(right, isAscending);
+        left = mergeSort(left, orderBy);
+        right = mergeSort(right, orderBy);
+        
         int data;
 
         while (!left.isEmpty() || !right.isEmpty()) {
@@ -93,16 +100,15 @@ public class StackQueue06 {
             } else if (right.size() == 0) {
                 inStack.push(left.pop());
             } else if (right.peek().compareTo(left.peek()) <= 0) {
-                // ASC --> DESC
-                data = isAscending ? left.pop() : right.pop();
+                data = ORDER_BY.ASC.equals(orderBy) ? left.pop() : right.pop();
                 inStack.push(data);
             } else {
-                // DESC --> ASC
-                data = isAscending ? right.pop() : left.pop();
+                data = ORDER_BY.ASC.equals(orderBy) ? right.pop() : left.pop();
                 inStack.push(data);
             }
         }
 
+        //TODO: Reverse 를 하지 않을 방법은 ???
         // Reverse
         Stack<Integer> r = new Stack<Integer>();
         while (!inStack.isEmpty()) {
@@ -112,87 +118,69 @@ public class StackQueue06 {
         return r;
     }
 
+
     //--------------------------------------------------------------------------------
     // Main
     //--------------------------------------------------------------------------------
     private static Stack<Integer> makeStack() {
         Stack<Integer> s = new Stack<Integer>();
+        StringBuffer sb = new StringBuffer();
 
         for (int i = 0; i < 10; i++) {
-            int data = (int)((Math.random() * 1000) % 1000);
+            int data = AssortedMethods.randomIntInRange(0, 100);    // (int)((Math.random() * 1000) % 1000);
             s.push(data);
+
+            // logging
+            sb.append(data);
+            sb.append("\n");
         }
 
+        System.out.println("\nNew stack:\n" + sb.toString());
         return s;
     }
 
-    private static void checkStack(Stack<Integer> s, boolean isAscending) {
-//        while (!s.isEmpty()) {
-//            System.out.println(s.pop());
-//        }
+    private static void checkStack(Stack<Integer> s, ORDER_BY orderBy) {
+        StringBuffer sb = new StringBuffer();
+        int last = ORDER_BY.ASC.equals(orderBy) ? Integer.MAX_VALUE : Integer.MIN_VALUE;
 
+        String order = ORDER_BY.ASC.equals(orderBy) ? "ORDER_BY.ASC" : "ORDER_BY.DESC";
+        System.out.println("---> " + order + ": \n");
 
-        int last = isAscending ? Integer.MAX_VALUE/*ascending*/ : Integer.MIN_VALUE/*descending*/;
         while (!s.isEmpty()) {
             int curr = s.pop();
+            sb.append(curr);
+            sb.append("\n");
 
-            boolean error = isAscending ? curr > last/*ascending*/ : curr < last/*descending*/;
+            boolean error = ORDER_BY.ASC.equals(orderBy) ? curr > last : curr < last;
             if (error) {
                 System.out.println("Error: " + last + " " + curr);
             }
 
             last = curr;
         }
+
+        System.out.println("(Top) \n" + sb.toString() + "(Bottom)");
     }
 
     public static void main(String[] args) {
-        Stack<Integer> s = new Stack<Integer>();
+        Stack<Integer> s;
 
-        for (int i = 0; i < 10; i++) {
-            int r = AssortedMethods.randomIntInRange(0, 100);
-            s.push(r);
-        }
-
-        /*
-        //--------------------------------------------------------------------------------
-        System.out.println("Ascending Order:");
-
-        sortAscending(s);
-
-        while (!s.isEmpty()) {
-            System.out.println(s.pop());
-        }
-
-        //--------------------------------------------------------------------------------
-        System.out.println("Descending Order:");
-
-        for (int i = 0; i < 10; i++) {
-            int r = AssortedMethods.randomIntInRange(0, 100);
-            s.push(r);
-        }
-
-
-        sortDescending(s);
-
-        while (!s.isEmpty()) {
-            System.out.println(s.pop());
-        }
-        */
+        // 
+        s = makeStack();
+        sort(s, ORDER_BY.ASC);
+        checkStack(s, ORDER_BY.ASC);
 
         s = makeStack();
-        sort(s, true);  // ASC
-        checkStack(s, true);
+        sort(s, ORDER_BY.DESC);
+        checkStack(s, ORDER_BY.DESC);
+
+        //
+        s = makeStack();
+        s = mergeSort(s, ORDER_BY.ASC);
+        checkStack(s, ORDER_BY.ASC);
 
         s = makeStack();
-        sort(s, false); //DESC
-        checkStack(s, false);
-
-        s = makeStack();
-        s = mergeSort(s, true); // ASC
-        checkStack(s, true);
-
-        s = makeStack();
-        s = mergeSort(s, false);    // DESC
-        checkStack(s, false);
+        s = mergeSort(s, ORDER_BY.DESC);
+        checkStack(s, ORDER_BY.DESC);
     }
 }
