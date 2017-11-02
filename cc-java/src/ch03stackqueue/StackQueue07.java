@@ -13,18 +13,14 @@ import java.util.LinkedList;
  *
  * (6E)
  * 3.6 Animal Shelter: An animal shelter, which holds only dogs and cats, operates on a strictly "first in, first out" basis.
- *                     People must adopt either the "oldest" (based on arrival time) of all animals at the shelter,
+ *                     People must adopt either the "oldest" (based on arrival time) of all animalShelter at the shelter,
  *                     or they can select whether they would prefer a dog or a cat (and will receive the oldest animal of that type).
  *                     They cannot select which specific animal they would like.
- *                     Create the data structures to maintain this system and implement operations such as enqueue, dequeueAny, dequeueDog, and dequeueCat.
+ *                     Create the data structures to maintain this system and implement operations such as enqueue, dequeueAny, 
+ *                     dequeueDog, and dequeueCat.
  *                     You may use the built-in LinkedList data structure.
  *
  *                     Hints: #22, #56, #63
- */
-
-/**
- * enqueue 할때 AnimalShelter 에서 order/timestamp 를 관리해 주어야 한다.
- * enqueue/peek 할때, 각 리스트가 비어 있는지 체크 필요
  */
 public class StackQueue07 {
 
@@ -38,8 +34,8 @@ public class StackQueue07 {
 
         public abstract String name();
 
-        public void setOrder(int ord) {
-            order = ord;
+        public void setOrder(int order) {
+            this.order = order;
         }
 
         public int getOrder() {
@@ -76,15 +72,15 @@ public class StackQueue07 {
     private static class AnimalShelter {
         LinkedList<Dog> dogs = new LinkedList<Dog>();
         LinkedList<Cat> cats = new LinkedList<Cat>();
-        private int order = 0;
+        private int order = 0;  // timestamp
 
         public void enqueue(Animal a) {
             a.setOrder(order++);
 
             if (a instanceof Dog) {
-                dogs.add((Dog) a);  // == addLast()
+                dogs.add((Dog) a);  // or addLast()
             } else if (a instanceof Cat) {
-                cats.add((Cat) a);  // == addLast()
+                cats.add((Cat) a);  // or addLast()
             }
         }
 
@@ -147,26 +143,34 @@ public class StackQueue07 {
     // Main
     //--------------------------------------------------------------------------------
     public static void main(String[] args) {
-        AnimalShelter animals = new AnimalShelter();
+        AnimalShelter animalShelter = new AnimalShelter();
 
-        animals.enqueue(new Cat("Callie"));
-        animals.enqueue(new Cat("Kiki"));
-        animals.enqueue(new Dog("Fido"));
-        animals.enqueue(new Dog("Dora"));
-        animals.enqueue(new Cat("Kari"));
-        animals.enqueue(new Dog("Dexter"));
-        animals.enqueue(new Dog("Dobo"));
-        animals.enqueue(new Cat("Copa"));
+        animalShelter.enqueue(new Cat("Callie"));
+        animalShelter.enqueue(new Cat("Kiki"));
+        animalShelter.enqueue(new Dog("Fido"));
+        animalShelter.enqueue(new Dog("Dora"));
+        animalShelter.enqueue(new Cat("Kari"));
+        animalShelter.enqueue(new Dog("Dexter"));
+        animalShelter.enqueue(new Dog("Dobo"));
+        animalShelter.enqueue(new Cat("Copa"));
+        System.out.println("enqueue: (Rear) Copa, Dobo, Dexter, Kari, Dora, Fido, Kiki, Callie (Front)");
 
-        System.out.println(animals.dequeueAny().name());
-        System.out.println(animals.dequeueAny().name());
-        System.out.println(animals.dequeueAny().name());
+        System.out.println("dequeueAny:");
+        System.out.println("---> " + animalShelter.dequeueAny().name());  // Callie
+        System.out.println("---> " + animalShelter.dequeueAny().name());  // Kiki
+        System.out.println("---> " + animalShelter.dequeueAny().name());  // Fido
 
-        animals.enqueue(new Dog("Dapa"));
-        animals.enqueue(new Cat("Kilo"));
+        System.out.println("dequeueDog:");
+        System.out.println("---> " + animalShelter.dequeueDog().name());  // Dora
+        System.out.println("dequeueCat:");
+        System.out.println("---> " + animalShelter.dequeueCat().name());  // Kari
 
-        while (animals.size() != 0) {
-            System.out.println(animals.dequeueAny().name());
+        animalShelter.enqueue(new Dog("Dapa"));
+        animalShelter.enqueue(new Cat("Kilo"));
+        System.out.println("enqueue: (Rear) Kilo, Dapa, Copa, Dobo, Dexter (Front)");
+
+        while (animalShelter.size() != 0) {
+            System.out.println("dequeueAny - " + animalShelter.dequeueAny().name());
         }
     }
 }
