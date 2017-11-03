@@ -7,7 +7,7 @@ import lib.TreeNode;
  *     배열 내 모든 원소는 배열 내에서 유일한 값을 갖는다.
  *
  * (4E)
- * 4.3 Given a sorted(increasing order) array,
+ * 4.3 Given a sorted (increasing order) array,
  *     write an algorithm to create a binary tree with minimal height.
  *
  * (6E)
@@ -77,7 +77,7 @@ public class TreeGraph03 {
         TreeNode root = createMinimalBST(array);
 
         System.out.println("Root? " + root.data);
-        System.out.println("Created BST? " + root.isBST());
-        System.out.println("Height: " + root.height());
+        System.out.println("Created BST? " + root.isBST()); //TODO: isBST()
+        System.out.println("Height: " + root.height()); //TODO: height()
     }
 }
