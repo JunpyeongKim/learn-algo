@@ -11,7 +11,8 @@ import java.util.LinkedList;
  *     (트리의 깊이가 D라면, 알고리즘 수행 결과로 D개의 연결 리스트가 만들어져야 한다.)
  *
  * (4E)
- * 4.4 Given a binary search tree, design an algorithm which creates a linked list of all the nodes at each depth
+ * 4.4 Given a binary search tree, 
+ *     design an algorithm which creates a linked list of all the nodes at each depth
  *     (i.e., if you have a tree with depth D, you’ll have D linked lists).
  *
  * (6E)
@@ -39,7 +40,7 @@ public class TreeGraph04 {
     //              - O(N) time
     //              - O(N) space
     //--------------------------------------------------------------------------------
-    public static ArrayList<LinkedList<TreeNode>> createDepthLinkedListBFS(TreeNode root) {
+    public static ArrayList<LinkedList<TreeNode>> createLinkedListAtDepthByBFS(TreeNode root) {
         ArrayList<LinkedList<TreeNode>> result = new ArrayList<LinkedList<TreeNode>>();
 
         // We want to iterate through the root first, then level 2, then level3, and so on.
@@ -57,7 +58,7 @@ public class TreeGraph04 {
                 LinkedList<TreeNode> parents = current; // Go to next depth
                 current = new LinkedList<TreeNode>();
 
-                // Visit the children
+                // Visit the children: left to right
                 for (TreeNode parent : parents) {
                     if (parent.left != null) {
                         current.add(parent.left);
@@ -80,32 +81,35 @@ public class TreeGraph04 {
     //              - O(N) space: recursive calls (in a balanced tree) --> O(logN)
     //                            ==>> dwarfed by the O(N) data that must be returned.
     //--------------------------------------------------------------------------------
-    private static void createDepthLinkedListDFS(TreeNode node,
-                                                 int depth,
+    private static void createLinkedListAtDepthByDFS(TreeNode node,
+                                                 int level,
                                                  ArrayList<LinkedList<TreeNode>> result) {
         if (node == null) {
             return;
         }
 
+        // Get or create the current linked list
         LinkedList<TreeNode> current;
 
-        if (result.size() == depth) {   // or null == result.get(depth)
+        //TODO: root --> depth 0 ? level 0 ? height 0?
+        if (result.size() == level) {   // or null == result.get(level)
             current = new LinkedList<TreeNode>();
             result.add(current);
         } else {
-            current = result.get(depth);
+            current = result.get(level);
         }
 
+        // Pre-order traversal
         current.add(node);
-        createDepthLinkedListDFS(node.left, depth + 1, result);
-        createDepthLinkedListDFS(node.right, depth + 1, result);
+        createLinkedListAtDepthByDFS(node.left, level + 1, result);
+        createLinkedListAtDepthByDFS(node.right, level + 1, result);
     }
 
-    public static ArrayList<LinkedList<TreeNode>> createDepthLinkedListDFS(TreeNode root) {
+    public static ArrayList<LinkedList<TreeNode>> createLinkedListAtDepthByDFS(TreeNode root) {
         ArrayList<LinkedList<TreeNode>> result = new ArrayList<LinkedList<TreeNode>>();
 
         if (root != null) {
-            createDepthLinkedListDFS(root, 0, result);
+            createLinkedListAtDepthByDFS(root, 0, result);
         }
 
         return result;
@@ -115,11 +119,12 @@ public class TreeGraph04 {
     //--------------------------------------------------------------------------------
     // Main
     //--------------------------------------------------------------------------------
-    private static void printResult(ArrayList<LinkedList<TreeNode>> result) {
-        int depth = 0;
+    private static void printResult(ArrayList<LinkedList<TreeNode>> result, String search) {
+        int level = 0;
 
+        System.out.println(search + " Approach:");
         for (LinkedList<TreeNode> list : result) {
-            System.out.print("Linked list at depth " + depth + ":");
+            System.out.print("---> Linked list at depth " + (level + 1) + ":");
 
             /* Alternative 01
             Iterator<TreeNode> iterator = list.listIterator();
@@ -134,22 +139,23 @@ public class TreeGraph04 {
             }
 
             System.out.println();
-            depth++;
+            level++;
         }
     }
 
     public static void main(String[] args) {
         int[] nodes_flattened = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ArrayList<LinkedList<TreeNode>> list;
+        TreeNode root;
 
         // BFS
-        TreeNode node1 = AssortedMethods.createTreeFromArray(nodes_flattened);
-        list = createDepthLinkedListBFS(node1);
-        printResult(list);
+        root = AssortedMethods.createTreeFromArray(nodes_flattened);
+        list = createLinkedListAtDepthByBFS(root);
+        printResult(list, "BFS");
 
         // DFS
-        TreeNode node2 = AssortedMethods.createTreeFromArray(nodes_flattened);
-        list = createDepthLinkedListDFS(node2);
-        printResult(list);
+        root = AssortedMethods.createTreeFromArray(nodes_flattened);
+        list = createLinkedListAtDepthByDFS(root);
+        printResult(list, "DFS");
     }
 }
