@@ -124,21 +124,20 @@ public class TreeGraph04 {
 
         System.out.println(search + " Approach:");
         for (LinkedList<TreeNode> list : result) {
-            System.out.print("---> Linked list at depth " + (level + 1) + ":");
+            System.out.print("---> Linked list at depth " + (level + 1) + ":"); //TODO: root --> depth 0 ? level 0 ? height 0?
 
-            /* Alternative 01
+            /*
             Iterator<TreeNode> iterator = list.listIterator();
             while (iterator.hasNext()) {
-                System.out.print(" " + iterator.next().data);
+                TreeNode t = iterator.next();
+                System.out.print(" " + t.data);
             }
             */
-
-            // Alternative 02
             for(TreeNode t : list) {
                 System.out.print(" " + t.data);
             }
-
             System.out.println();
+
             level++;
         }
     }
