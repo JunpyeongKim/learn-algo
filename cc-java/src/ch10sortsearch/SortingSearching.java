@@ -6,7 +6,7 @@ package ch10sortsearch;
  *      A의 끝에는 B를 수용하기 충분한 여유 공간이 있다.
  *      B와 A를 정렬된 상태로 병합하는 메서드를 작성하라.
  *
- * (4E)
+ * (4E) ---> (5E) 11.1
  * 9.1 You are given two sorted arrays, A and B, and A has a large enough buffer at the end to hold B. 
  *     Write a method to merge B into A in sorted order.
  *
@@ -14,19 +14,25 @@ package ch10sortsearch;
  * 10.1 Sorted Merge: You are given two sorted arrays, A and B, where A has a large enough buffer at the end to hold B. 
  *                    Write a method to merge B into A in sorted order.
  *
- *                    Hints: #332
+ *                    Hints: 
+ *                    #332
  */
 
 // Done 2
 /**
  * 10.2 철자 순서만 바꾼 문자열이 서로 인접하도록 문자열 배열을 정렬하는 메서드를 작성하라.
  *
- * (4E)
+ * (4E) ---> (5E) 11.2
  * 9.2 Write a method to sort an array of strings so that all the anagrams are next to each other.
  *
  * (6E)
  * 10.2 Group Anagrams: Write a method to sort an array of strings so that all anagrams are next to each other.
- *                      Hints: #177, #182, #263, #342
+ * 
+ *                      Hints: 
+ *                      #177 
+ *                      #182 
+ *                      #263 
+ *                      #342
  */
 
 // Done 3
@@ -61,6 +67,12 @@ package ch10sortsearch;
  */
 
 
+// TBD 4
+/**
+ * 10.4
+ */
+
+
 // Done 5
 /**
  * 10.5 빈 문자열이 섞여 있는 정렬 상태의 배열이 주어졌을 때, 특정한 문자열의 위치를 찾는 메서드를 작성하라.
@@ -87,15 +99,38 @@ package ch10sortsearch;
  *                     Hints: #256
  */
 
-//--------------------------------------------------------------------------------
-// Korean Edition: Unsolved --> 2, 5, 6, 7
-//--------------------------------------------------------------------------------
+// TBD 6
+/**
+ * 10.6
+ */
+
+
+// TBD 7
+/**
+ * 10.7
+ */
+
+
 // TBD 8
 /**
  * 10.8
  */
 
+ 
+
 //--------------------------------------------------------------------------------
-// English Edition: Unsolved --> 4E(), 6E()
+// Completed 
+// --> KE(8개: 1, 2, - 3, 4, 5, 6, 7, 8)
+// --> 4E(7개: 1, 2, - 3, 4, 5, 6, 7)
+// --> 6E(11개: 1, 2, - 3, 4, 5, 6, 7, 8, 9, 11)
+//--------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------
+// 배열과 문자열(1.3), 재귀(9.3), 중간 난이도 연습 문제(17.6, 17.12), 고난이도 연습문제(18.5)
+//
+// 6E
+// Additional Questions: Arrays and Strings (#1.2), Recursion (#8.3), Moderate (#16.10, #16.16, #16.21, #16.24),
+// Hard (#17.11 , #17.26).
 //--------------------------------------------------------------------------------
 public class SortingSearching {}

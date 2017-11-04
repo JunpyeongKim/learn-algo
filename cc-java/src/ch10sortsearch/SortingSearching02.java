@@ -8,15 +8,17 @@ import java.util.*;
 /**
  * 10.2 철자 순서만 바꾼 문자열이 서로 인접하도록 문자열 배열을 정렬하는 메서드를 작성하라.
  *
- * (4E)
+ * (4E) ---> (5E) 11.2
+ * 9.2 Write a method to sort an array of strings so that all the anagrams are next to each other.
  *
  * (6E)
- * 10.2 Group Anagrams: Write a method to sort an array of strings so that the anagrams are next to each other.
- *
- *                      Hint #177.
- *                      Hint #182.
- *                      Hint #263.
- *                      Hint #342.
+ * 10.2 Group Anagrams: Write a method to sort an array of strings so that all anagrams are next to each other.
+ * 
+ *                      Hints: 
+ *                      #177 
+ *                      #182 
+ *                      #263 
+ *                      #342
  */
 
 /**
@@ -26,8 +28,12 @@ import java.util.*;
  *  2) HashMap 에 정렬된 문자열을 키로하여 동일한 키를 가지는 값들을 Chaining(LinkedList)로 Collect후 기존 배열에 차례대로 추가하면 된다.
  */
 public class SortingSearching02 {
+    // Common Concept
+    // ---> Permutation(>>> Anagram)이므로 ---> String을 Sorting하면, 동일한 String이 나와야한다.
+
+
     //--------------------------------------------------------------------------------
-    // Solution #1. Arrays.sort() + Comparator
+    // Solution #1. java.util.Arrays.sort() + Comparator
     //--------------------------------------------------------------------------------
     private static class AnagramComparator implements Comparator<String>{
         public String sortChars(String s) {
@@ -48,7 +54,7 @@ public class SortingSearching02 {
 
 
     //--------------------------------------------------------------------------------
-    // Solution #2. Buffer (a modification of Bucket Sort)
+    // Solution #2. Buffer (a modification of Bucket Sort) - HashMap with Chaining
     //--------------------------------------------------------------------------------
     private static String sortString(String s) {
         char[] charArray = s.toCharArray();
@@ -79,6 +85,7 @@ public class SortingSearching02 {
                 list = map.get(key);
             } else {
                 list = new ArrayList<String>();
+                map.put(key, list);
             }
 
             list.add(str);
@@ -86,6 +93,7 @@ public class SortingSearching02 {
 
         int index = 0;
         for (String key : map.keySet()) {
+            // System.out.println("key - " + key);
             ArrayList<String> list = map.get(key);
 
             for (String str : list) {
@@ -99,22 +107,18 @@ public class SortingSearching02 {
     // Main
     //--------------------------------------------------------------------------------
     public static void main(String[] args) {
-        String[] array = {"apple", "banana", "carrot", "ele", "duck", "papel", "tarroc", "cudk", "eel", "lee"};
-        String[] array01 = new String[array.length];
-        String[] array02 = new String[array.length];
-
-        for (int i = 0; i < array.length; i++) {
-            array01[i] = array02[i] = array[i];
-        }
+        String[][] array = {
+            {"apple", "banana", "carrot", "ele", "duck", "papel", "tarroc", "cudk", "eel", "lee"},
+            {"apple", "banana", "carrot", "ele", "duck", "papel", "tarroc", "cudk", "eel", "lee"}
+        };
+        System.out.println(AssortedMethods.stringArrayToString(array[0]));
 
         // Comparator
-        System.out.println("array01: " + AssortedMethods.stringArrayToString(array01));
-        sort01(array01);
-        System.out.println("         " + AssortedMethods.stringArrayToString(array01));
+        sort01(array[0]);
+        System.out.println("---> Comparator: " + AssortedMethods.stringArrayToString(array[0]));
 
         // Buffer: HashMap with Chaining
-        System.out.println("array02: " + AssortedMethods.stringArrayToString(array02));
-        sort02(array02);
-        System.out.println("         " + AssortedMethods.stringArrayToString(array02));
+        sort02(array[1]);
+        System.out.println("---> Buffer: " + AssortedMethods.stringArrayToString(array[1]));
     }
 }
