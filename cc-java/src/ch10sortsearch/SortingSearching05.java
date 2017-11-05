@@ -1,5 +1,7 @@
 package ch10sortsearch;
 
+import lib.AssortedMethods;
+
 /**
  * 10.5 빈 문자열이 섞여 있는 정렬 상태의 배열이 주어졌을 때, 특정한 문자열의 위치를 찾는 메서드를 작성하라.
  *
@@ -7,7 +9,7 @@ package ch10sortsearch;
  *          입력: {"at", "", "", "", "ball", "", "", "car", "", "", "dad", "", ""} 배열에서 ball 을 찾아라.
  *          출력: 4
  *
- * (4E)
+ * (4E) ---> (5E) 11.5
  * 9.5 Given a sorted array of strings which is interspersed with empty strings,
  *     write a method to find the location of a given string.
  *
@@ -24,29 +26,24 @@ package ch10sortsearch;
  *
  *                     Hints: #256
  */
-
-/**
- * mid 값이 Empty String 인 경우 왼쪽이든 오른쪽이든 Non-Empty String인 mid 값을 찾아서 범위를 좁혀야 한다.
- *
- * Recursive 는 stack overflow 발생 가능성과 퍼포먼스 문제가 있을수 있으므로 Iterative 로 범위를 좁혀가면서 풀 수도 있다.
- *  --> Recursive 경우, 항상 범위 에러가 발생가능하므로 범위 체크 필요
- *
- * String 같은 클래스는 Comparable 을 구현하므로 compareTo() 를 이용하여 비교 가능
- */
 public class SortingSearching05 {
-    // 유일한 값 --> 시간은 O(log n)
-    // 중복된 값 --> 시간 O(log n) ???
+    //TODO: 유일한 값 --> 시간은 O(log n)
+    //TODO: 중복된 값 --> 시간 O(log n) ???
 
-    // Recursive
+    //--------------------------------------------------------------------------------
+    // Solution #1: Recursion
+    //              --> 항상 Excessive Call Stack 사용으로 Stack Overflow Exception 발생 및 Performance 저하 가능성이 존재하므로
+    //              --> 되도록 Iteration 을 이용하자.
+    //--------------------------------------------------------------------------------
     private static int searchR(String[] strings, String str, int first, int last) {
         if (first > last) {
             return -1;
         }
 
-        // mid value
+        // Median
         int mid = (first + last) / 2;
 
-        // non-empty mid --> Non-Empty String 인 mid 값을 검색하는것이 이 문제의 포인트
+        // Find new, non-empty median <--- important!!!
         if (strings[mid].isEmpty()) {
             int left = mid - 1;
             int right = mid + 1;
@@ -66,9 +63,8 @@ public class SortingSearching05 {
             }
         }
 
-        // compare and search
-        // 그리고 String 크기/순서 비교는 Comparable.compareTo() 이용
-        int result = strings[mid].compareTo(str);
+        // Compare and search
+        int result = strings[mid].compareTo(str);   // Comparable.compareTo()
 
         if (result == 0) {
             return mid;
@@ -79,15 +75,19 @@ public class SortingSearching05 {
         }
     }
 
-    // Iterative
+    //--------------------------------------------------------------------------------
+    // Solution #2: Iteration
+    //--------------------------------------------------------------------------------
     private static int searchI(String[] strings, String str, int first, int last) {
         while (first <= last) {
+            // Median
             int mid = (first + last) / 2;
 
-            // find non-empty mid
+            // Find new, non-empty median <--- important!!!
             if (strings[mid].isEmpty()) {
                 int left = mid - 1;
                 int right = mid + 1;
+
                 while (true) {
                     if (left < first && right > last) {
                         return -1;
@@ -104,8 +104,8 @@ public class SortingSearching05 {
                 }
             }
 
-            // compare and search
-            int result = strings[mid].compareTo(str);
+            // Compare and search
+            int result = strings[mid].compareTo(str);   // Comparable.comareTo()
             if (result == 0) {
                 return mid;
             } else if (result > 0) {
@@ -120,23 +120,38 @@ public class SortingSearching05 {
 
     //
     public static int search(String[] strings, String str) {
-        if (strings == null || str == null || strings.length == 0 || str.isEmpty()) {
+        if (strings == null || strings.length == 0 || str == null || str.isEmpty()) {
             return -1;
         }
 
-        // Recursive
-        return searchR(strings, str, 0, strings.length - 1);
+        // Recursion
+        int indexRecursion = searchR(strings, str, 0, strings.length - 1);
 
-        // Iterative
-        // return searchI(strings, str, 0, strings.length - 1);
+        // Iteration
+        int indexIteration = searchI(strings, str, 0, strings.length - 1);
+
+        if (indexRecursion == indexIteration) {
+            return indexRecursion;
+        }
+
+        System.out.println("indexRecursion != indexIteration --> " + indexRecursion + " != " + indexIteration);
+        return -1;
     }
+
 
     //--------------------------------------------------------------------------------
     // Main
     //--------------------------------------------------------------------------------
     public static void main(String[] args) {
         String[] stringList = {"apple", "", "", "banana", "", "", "", "carrot", "duck", "", "", "eel", "", "flower"};
+        System.out.println(AssortedMethods.stringArrayToString(stringList));
 
-        search(stringList, "ac");
+        System.out.println("<ac> is appears at location " + search(stringList, "ac"));
+
+        for (String s : stringList) {
+            if (!s.isEmpty()) {
+                System.out.println("<" + s + "> is appears at location " + search(stringList, s));
+            }
+        }
     }
 }
