@@ -45,7 +45,7 @@ package ch10sortsearch;
  *          입력: {15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14}에서 5를 찾을 것
  *          출력: 8 (5의 배열 내의 위치 첨잣값)
  *
- * (4E)
+ * (4E) ---> (5E) 11.3
  * 9.3 Given a sorted array of n integers that has been rotated an unknown number of times, 
  *     give an O(log n) algorithm that finds an element in the array. 
  *     You may assume that the array was originally sorted in increasing order.
@@ -63,7 +63,9 @@ package ch10sortsearch;
  *                                  Input: find 5 in {15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14}
  *                                  Output: 8 (the index of 5 in the array)
  *
- *                               Hints: #298, #310
+ *                               Hints: 
+ *                               #298
+ *                               #310
  */
 
 
