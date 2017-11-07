@@ -43,7 +43,7 @@ public class SortingSearching05 {
         // Median
         int mid = (first + last) / 2;
 
-        // Find new, non-empty median <--- important!!!
+        // Find the closest non-empty median <--- important!!!
         if (strings[mid].isEmpty()) {
             int left = mid - 1;
             int right = mid + 1;
@@ -83,7 +83,7 @@ public class SortingSearching05 {
             // Median
             int mid = (first + last) / 2;
 
-            // Find new, non-empty median <--- important!!!
+            // Find the closest non-empty median <--- important!!!
             if (strings[mid].isEmpty()) {
                 int left = mid - 1;
                 int right = mid + 1;
