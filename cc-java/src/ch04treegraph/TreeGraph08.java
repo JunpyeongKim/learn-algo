@@ -19,7 +19,7 @@ import lib.TreeNode;
  * 4.10 Check Subtree: T1 and T2 are two very large binary trees, with T1 much bigger than T2.
  *                     Create an algorithm to determine if T2 is a subtree of T1.
  *
- *                     A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtree of n is identical to T2.
+ *                     A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtree of n is identical to T2 .
  *                     That is, if you cut off the tree at node n, the two trees would be identical.
  *
  *                     Hints:
@@ -154,39 +154,26 @@ public class TreeGraph08 {
     //--------------------------------------------------------------------------------
     public static void main(String[] args) {
         // Sample 01
-        int[] array1 = {1, 2, 1, 3, 1, 1, 5};
-        int[] array2 = {2, 3, 1};
-
-        TreeNode t1 = AssortedMethods.createTreeFromArray(array1);
-        TreeNode t2 = AssortedMethods.createTreeFromArray(array2);
-
-        if (containsTree01(t1, t2)) {
-            System.out.println("containsTree01: t2 is a subtree of t1");
-        } else {
-            System.out.println("containsTree01: t2 is not a subtree of t1");
-        }
-
-        if (containsTree02(t1, t2)) {
-            System.out.println("containsTree02: t2 is a subtree of t1");
-        } else {
-            System.out.println("containsTree02: t2 is not a subtree of t1");
-        }
-
-        // Sample 02
+        int[][] array1 = {{1, 2, 1, 3, 1, 1, 5}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}};
+        int[][] array2 = {{2, 3, 1}, {2, 4, 5, 8, 9, 10, 11}};
         int[] array3 = {1, 2, 3};
-        TreeNode t3 = AssortedMethods.createTreeFromArray(array1);
-        TreeNode t4 = AssortedMethods.createTreeFromArray(array3);
 
-        if (containsTree01(t3, t4)) {
-            System.out.println("containsTree01: t4 is a subtree of t3");
-        } else {
-            System.out.println("containsTree01: t4 is not a subtree of t3");
-        }
-
-        if (containsTree02(t3, t4)) {
-            System.out.println("containsTree02: t4 is a subtree of t3");
-        } else {
-            System.out.println("containsTree02: t4 is not a subtree of t3");
+        for (int i = 0; i < array1.length; i++) {
+            TreeNode t1 = AssortedMethods.createTreeFromArray(array1[i]);
+            TreeNode t2 = AssortedMethods.createTreeFromArray(array2[i]);
+    
+            if (containsTree01(t1, t2) && containsTree02(t1, t2)) {
+                System.out.println("t2 is a subtree of t1");
+            } else {
+                System.out.println("t2 is not a subtree of t1");
+            }
+    
+            TreeNode t3 = AssortedMethods.createTreeFromArray(array3);
+            if (containsTree01(t1, t3) && containsTree02(t1, t3)) {
+                System.out.println("t3 is a subtree of t1");
+            } else {
+                System.out.println("t3 is not a subtree of t1");
+            }    
         }
     }
 }
