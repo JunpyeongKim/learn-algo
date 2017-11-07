@@ -27,12 +27,24 @@ import lib.AssortedMethods;
  *                     Hints: #256
  */
 public class SortSearch05 {
-    //TODO: 유일한 값 --> 시간은 O(log n)
-    //TODO: 중복된 값 --> 시간 O(log n) ???
+    /* 
+    # Strategy
+        - Simply use binary search.
+        --> a simple modification of binary search : fix the comparision against mid.
+        --> We simply move mid into the closest non-empty string
+
+    # Runtime
+        - In the worst case, i.e. {"", "", "", ..., "last"} --> O(N)
+        - 모든 원소가 Unique --> O(logN)
+        - 원소가 Duplicate --> O(N)
+
+    # The recursive code can easily be modified to be iterative.
+    */
+
 
     //--------------------------------------------------------------------------------
     // Solution #1: Recursion
-    //              --> 항상 Excessive Call Stack 사용으로 Stack Overflow Exception 발생 및 Performance 저하 가능성이 존재하므로
+    //              --> Excessive Call Stack 사용 --> StackOverflowException 발생 및 Performance 저하 가능성
     //              --> 되도록 Iteration 을 이용하자.
     //--------------------------------------------------------------------------------
     private static int searchR(String[] strings, String str, int first, int last) {
@@ -41,9 +53,9 @@ public class SortSearch05 {
         }
 
         // Median
-        int mid = (first + last) / 2;
+        int mid = (first + last) / 2;   // (first + last) >> 1;
 
-        // Find the closest non-empty median <--- important!!!
+        // (Important!!!) Find the closest non-empty median
         if (strings[mid].isEmpty()) {
             int left = mid - 1;
             int right = mid + 1;
@@ -68,9 +80,9 @@ public class SortSearch05 {
 
         if (result == 0) {
             return mid;
-        } else if (result > 0) {
+        } else if (result > 0) {    // left
             return searchR(strings, str, first, mid - 1);
-        } else {
+        } else {    // right
             return searchR(strings, str, mid + 1, last);
         }
     }
@@ -81,9 +93,9 @@ public class SortSearch05 {
     private static int searchI(String[] strings, String str, int first, int last) {
         while (first <= last) {
             // Median
-            int mid = (first + last) / 2;
+            int mid = (first + last) / 2;   // (first + last) >> 1
 
-            // Find the closest non-empty median <--- important!!!
+            // (Important!!!) Find the closest non-empty median
             if (strings[mid].isEmpty()) {
                 int left = mid - 1;
                 int right = mid + 1;
@@ -108,9 +120,9 @@ public class SortSearch05 {
             int result = strings[mid].compareTo(str);   // Comparable.comareTo()
             if (result == 0) {
                 return mid;
-            } else if (result > 0) {
+            } else if (result > 0) {    // left
                 last = mid - 1;
-            } else {
+            } else {    // right
                 first = mid + 1;
             }
         }
