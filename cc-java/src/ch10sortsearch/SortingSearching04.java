@@ -16,4 +16,34 @@ package ch10sortsearch;
  *                     #207
  */
 public class SortingSearching04 {
+    // a size limit of 20 GB
+    // --> it suggests that they don't want you to bring all the data into memory.
+    //
+    // We only bring part of data into memory.
+    // We'll divide the file into chunks, which are x MB
+    // , where x is the amount of memory we have available
+    //
+    // --> Each chunks is sorted separately and then saved back to the file system.
+    //
+    // Once all the chunks are sorted,
+    // --> we merge the chunks, one by one
+    //
+    // ==> known as "External sort"
+
+    // http://www.geeksforgeeks.org/external-sorting
+    // - can handle massive amout of data
+    // - is required when the data being sorted do not fit into the main memory (usually RAM) and instead they must reside in the slower external memory (usually a hard drive)
+    // - typically uses a hybrid sort-merge strategy
+    //   - in the sorting phase, chunks of data small enough to fit in main memory are read, sorted, and written out to a temporary file.
+    //   - in the merge phase, the sorted sub-files are combined into a single larger file.
+    //
+    // a run : part of file that is small enough to fit in main memory
+    // 
+    // - MergeSort ---> Merge K Sorted Arrays
+    //   - http://www.geeksforgeeks.org/merge-sort/
+    //   - http://www.geeksforgeeks.org/merge-k-sorted-arrays/ 
+
+    //TODO: External Sort
+    //TODO: MergeSort
+    //TODO: Merger K Sorted Array or N-way merge
 }

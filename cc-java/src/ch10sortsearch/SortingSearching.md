@@ -69,7 +69,7 @@ package ch10sortsearch;
  */
 
 
-// Done 4 ---> //TODO: External Sort (MergeSort, Merger K Sorted Array)
+// WIP 4
 /**
  * 10.4 줄당 하나의 문자열이 들어 있는 20GB짜리 파일이 있다고 하자.
  *      이 파일을 정렬하려면 어떻게 해야 하겠는지 설명하라.
@@ -112,6 +112,24 @@ package ch10sortsearch;
  *
  *                     Hints: #256
  */
+
+# 10.5 
+    빈 문자열이 섞여 있는 정렬 상태의 배열이 주어졌을 때, 특정한 문자열의 위치를 찾는 메서드를 작성하라.
+
+    - 예
+      입력: {"at", "", "", "", "ball", "", "", "car", "", "", "dad", "", ""} 배열에서 ball 을 찾아라.
+      출력: 4
+
+(4E) ---> (5E) 11.5
+
+> 9.5 Given a sorted array of strings which is interspersed with empty strings,
+> write a method to find the location of a given string.
+> Example: find "ball" in ["at", "", "", "", "ball", "", "", "car", "", "", "dad", "", ""] will return 4
+> Example: find "ballcar" in ["at", "", "", "", "", "ball", "car", "", "", "dad", "", ""] will return -1
+
+- (6E)
+    10.5 Sparse Search: Given a sorted array of strings that is interspersed with empty strings,
+
 
 // TBD 6
 /**
