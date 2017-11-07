@@ -8,5 +8,5 @@ package ch10sortsearch;
  * (6E)
  *
  */
-public class SortingSearching06TBD {
+public class SortSearch06TBD {
 }

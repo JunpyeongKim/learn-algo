@@ -33,7 +33,7 @@ import lib.AssortedMethods;
  *                               #298
  *                               #310
  */
-public class SortingSearching03 {
+public class SortSearch03 {
     /**
      * 정렬이 된 배열이라는 것이 문제를 간단하게 만들어 준다.
      *

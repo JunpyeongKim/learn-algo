@@ -27,7 +27,7 @@ import lib.AssortedMethods;
  *
  * 단, 배열이 Ascending Sorting 으로 가정하고 풀었는데...문제 어디에도 ASC, DESC 는 언급이 없다. 주의 필요
  */
-public class SortingSearching01 {
+public class SortSearch01 {
     //--------------------------------------------------------------------------------
     // Solution: Assume ascending order
     //--------------------------------------------------------------------------------

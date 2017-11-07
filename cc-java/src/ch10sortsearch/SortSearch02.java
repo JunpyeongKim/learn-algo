@@ -27,7 +27,7 @@ import java.util.*;
  *  1) Comparator 와 내부에서는 문자열 sorting 기능을 이용
  *  2) HashMap 에 정렬된 문자열을 키로하여 동일한 키를 가지는 값들을 Chaining(LinkedList)로 Collect후 기존 배열에 차례대로 추가하면 된다.
  */
-public class SortingSearching02 {
+public class SortSearch02 {
     // Common Concept
     // ---> Permutation(>>> Anagram)이므로 ---> String을 Sorting하면, 동일한 String이 나와야한다.
 

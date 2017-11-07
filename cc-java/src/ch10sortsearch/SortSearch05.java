@@ -26,7 +26,7 @@ import lib.AssortedMethods;
  *
  *                     Hints: #256
  */
-public class SortingSearching05 {
+public class SortSearch05 {
     //TODO: 유일한 값 --> 시간은 O(log n)
     //TODO: 중복된 값 --> 시간 O(log n) ???
 

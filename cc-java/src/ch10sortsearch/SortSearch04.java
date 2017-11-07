@@ -15,7 +15,7 @@ package ch10sortsearch;
  *                     Hints: 
  *                     #207
  */
-public class SortingSearching04 {
+public class SortSearch04 {
     // a size limit of 20 GB
     // --> it suggests that they don't want you to bring all the data into memory.
     //
