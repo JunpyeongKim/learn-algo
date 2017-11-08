@@ -15,30 +15,35 @@ import java.util.*;
  * 10.2 Group Anagrams: Write a method to sort an array of strings so that all anagrams are next to each other.
  * 
  *                      Hints: 
- *                      #177 
- *                      #182 
- *                      #263 
- *                      #342
- */
-
-/**
- * Array Sorting 이므로 가장 기본적이고 쉬운 방법이 Arrays.sort() 를 이용하면 될 것이다.
- *  --> char[] sorting 을 기본 제공하므로 다른 타입의 배열을 정렬하기 원하면 Comparator 만 만들어서 제공하면 된다.
- *  1) Comparator 와 내부에서는 문자열 sorting 기능을 이용
- *  2) HashMap 에 정렬된 문자열을 키로하여 동일한 키를 가지는 값들을 Chaining(LinkedList)로 Collect후 기존 배열에 차례대로 추가하면 된다.
+ *                      #177. How do you check if two words are anagrams of each other? 
+ *                            Think about what the definition of "anagram" is. 
+ *                            Explain it in your own words. 
+ *                      #182. Two words are anagrams if they contain the same characters but in different orders.
+ *                            How can you put characters in order? 
+ *                      #263. Can you leverage a standard sorting algorithm? 
+ *                      #342. Do you even need to truly "sort"? Or is just reorganizing the list sufficient?
  */
 public class SortSearch02 {
-    // Common Concept
-    // ---> Permutation(>>> Anagram)이므로 ---> String을 Sorting하면, 동일한 String이 나와야한다.
+    /*
+    # Strategy
+      - Group the strings such that the permutations(>>> anagrams) appear next to each other.
+      --> No specific ordering of the words is required.
+    
+    # Permutation/Anagram : the same characters but in different orders
+      - Count the occurrences of the distinct characters
+      - Just sort the string
+    */
 
 
     //--------------------------------------------------------------------------------
-    // Solution #1. java.util.Arrays.sort() + Comparator
+    // Solution #1: java.util.Arrays.sort() + Comparator
+    //              - Time Complexity: O(n log(n))
+    //              - This may be the best we can do for a general sorting algorithm
     //--------------------------------------------------------------------------------
     private static class AnagramComparator implements Comparator<String>{
         public String sortChars(String s) {
             char[] charArray = s.toCharArray();
-            Arrays.sort(charArray);
+            Arrays.sort(charArray); // 표준 정렬 알고리즘(Merge Sort, Quick Sort)
             return new String(charArray);
         }
 
@@ -49,12 +54,14 @@ public class SortSearch02 {
     }
 
     public static void sort01(String[] array) {
-        Arrays.sort(array, new AnagramComparator());    // Time: O(n log(n))
+        Arrays.sort(array, new AnagramComparator());
     }
 
 
     //--------------------------------------------------------------------------------
-    // Solution #2. Buffer (a modification of Bucket Sort) - HashMap with Chaining
+    // Solution #2: Buffer(HashMap with Chaining) --> a modification of "Bucket Sort"
+    //              - We don't actually need to fully sort the array
+    //              --> We only need to group strings in the array by anagram
     //--------------------------------------------------------------------------------
     private static String sortString(String s) {
         char[] charArray = s.toCharArray();
@@ -64,42 +71,32 @@ public class SortSearch02 {
 
     public static void sort02(String[] strings) {
         // HashMap with Chaining
-
-        /*
-        HashMapList<String, String> map = new HashMapList<String, String>();
-
-        for (String s : array) {
-            String key = sortChars(s);
-            map.put(key, s);
-        }
-        */
-
         Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
 
-        // classify
+        // Group
         for (String str : strings) {
             String key = sortString(str);
-            ArrayList<String> list;
 
-            if (map.containsKey(key)) {
-                list = map.get(key);
-            } else {
-                list = new ArrayList<String>();
-                map.put(key, list);
+            if (!map.containsKey(key)) {
+                map.put(key, new ArrayList<String>());
             }
 
+            ArrayList<String> list = map.get(key);
             list.add(str);
         }
 
+        // Convert
         int index = 0;
         for (String key : map.keySet()) {
-            // System.out.println("key - " + key);
             ArrayList<String> list = map.get(key);
 
+            System.out.print("\n[debug] " + key + " - ");
             for (String str : list) {
                 strings[index++] = str;
+                System.out.print(str + ", ");
             }
         }
+        System.out.println();
     }
 
 
@@ -113,12 +110,12 @@ public class SortSearch02 {
         };
         System.out.println(AssortedMethods.stringArrayToString(array[0]));
 
-        // Comparator
+        // Arrays.sort + Comparator
         sort01(array[0]);
         System.out.println("---> Comparator: " + AssortedMethods.stringArrayToString(array[0]));
 
-        // Buffer: HashMap with Chaining
+        // Bucket sort - HashMap with Chaining
         sort02(array[1]);
-        System.out.println("---> Buffer: " + AssortedMethods.stringArrayToString(array[1]));
+        System.out.println("---> Bucket sort: " + AssortedMethods.stringArrayToString(array[1]));
     }
 }
