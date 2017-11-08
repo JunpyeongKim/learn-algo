@@ -35,7 +35,7 @@ package ch10sortsearch;
  *                      #342
  */
 
-// Done 3
+// Finished 3
 /**
  * 10.3 n개의 정수로 구성된 정렬 상태의 배열을 임의 홧수만큼 회전시켜(rotation) 얻은 배열이 입력으로 주어진다고 하자.
  *      이 배열에서 특정한 원소를 찾는 알고리즘을 고안하라.
@@ -64,8 +64,8 @@ package ch10sortsearch;
  *                                  Output: 8 (the index of 5 in the array)
  *
  *                               Hints: 
- *                               #298
- *                               #310
+ *                               #298. Can you modify binary search for this purpose?
+ *                               #310. What is the runtime of your algorithm? What will happen if the array has duplicates?
  */
 
 
@@ -87,7 +87,7 @@ package ch10sortsearch;
  */
 
 
-// Done 5
+// Finished 5
 /**
  * 10.5 빈 문자열이 섞여 있는 정렬 상태의 배열이 주어졌을 때, 특정한 문자열의 위치를 찾는 메서드를 작성하라.
  *
@@ -136,7 +136,7 @@ package ch10sortsearch;
 // Completed 
 // --> KE(8개: 1, 2, 3, 5, - 4, 6, 7, 8)
 // --> 4E(7개: 1, 2, 3, 5, - 4, 6, 7)
-// --> 6E(11개: 1, 2, 3,5, - 4, 6, 7, 8, 9, 11)
+// --> 6E(11개: 1, 2, 3, 5, - 4, 6, 7, 8, 9, 11)
 //--------------------------------------------------------------------------------
 
 

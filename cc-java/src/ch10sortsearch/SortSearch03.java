@@ -30,22 +30,22 @@ import lib.AssortedMethods;
  *                                  Output: 8 (the index of 5 in the array)
  *
  *                               Hints: 
- *                               #298
- *                               #310
+ *                               #298. Can you modify binary search for this purpose?
+ *                               #310. What is the runtime of your algorithm? What will happen if the array has duplicates?
  */
 public class SortSearch03 {
-    /**
-     * 정렬이 된 배열이라는 것이 문제를 간단하게 만들어 준다.
-     *
-     * 단, 회전시켰으므로 Binary Search (O(log n)) 를 사용하면 해결이 수월해진다.
-     *  <-- 반대로, O(log n) 을 구현하라고 하면, Binary Search 를 사용하면 된다.
-     *
-     * 검색 조건
-     *  1) 범위 인덱스가 인버스 될 경우 -1
-     *  2) 범위 중간값과 같으면 바로 종료
-     *  3) 왼쪽, 오른쪽 중에 제대로 정렬된 곳을 찾아서 그 범위내에 찾는 값이 있으면 그 범위에서 다시 검색, 아니면 반대쪽 범위에서 검색
-     *  4) 중복된 값이 연속으로 존재하는 경우도 체크 필요
-     */
+    /*
+    # Strategy
+      - Classic binary search --> insufficient
+      --> One half of the array must be ordered normally (in increasing order)
+      --> i.e, Either the left or right half must be normally ordered.
+    
+    # Runtime
+      - O(log N) if all the elements are unique
+      - O(N) with many duplicates (a.k.a linear search)
+        - have to search both the left and right sides of the array
+        - e.g., {2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
+    */
 
     //--------------------------------------------------------------------------------
     // Solution
@@ -56,12 +56,13 @@ public class SortSearch03 {
         }
 
         // Median
-        int mid = (left + right) / 2;
+        int mid = (left + right) / 2;   // (left + right) >> 1
         if (a[mid] == x) {
             return mid;
         }
 
-        // Find the right range to compare
+        // Either the left or right half must be normally ordered
+        // --> Find out which side is normally ordered.
         if (a[left] < a[mid]) {
             // The left half is normally ordered.
             if (x >= a[left] && x < a[mid]) {
