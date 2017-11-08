@@ -16,20 +16,21 @@ import lib.AssortedMethods;
  *                    Write a method to merge B into A in sorted order.
  *
  *                    Hints: 
- *                    #332
- */
-
-/**
- * merge sort 의 일부를 문제로 낸 것인데,
- * B를 A에 머지하는것이므로 B를 기준으로 루프를 돌린다.
- * 정렬된 배열의 병합은 가장 뒤에서부터 병합하는것이 정렬을 유지하기 좋은 전략이다.
- * B를 기준으로 병합이 끝나면 루프는 종료하면 된다. 왜냐면 혹시나 남아있는 A도 이미 정렬된 상태이니까
- *
- * 단, 배열이 Ascending Sorting 으로 가정하고 풀었는데...문제 어디에도 ASC, DESC 는 언급이 없다. 주의 필요
+ *                    #332. Try moving from the end of the array to the beginning.
  */
 public class SortSearch01 {
+    /*
+    # Strategy
+      - a part of the standard merge-sort
+      - merge A and B from the back by comparing each element.
+      --> Since A has enough buffer at the end, it's better to insert elements into the back of the array.
+    
+    # Check if Ascending or Descending order
+      --> Assume ascending order
+    */
+
     //--------------------------------------------------------------------------------
-    // Solution: Assume ascending order
+    // Solution
     //--------------------------------------------------------------------------------
     public static void merge(int[] a, int[] b, int lenA, int lenB) {
         int indexA = lenA - 1;
@@ -64,6 +65,6 @@ public class SortSearch01 {
 
         merge(a, b, 8, 6);
         
-        System.out.println("---> " + AssortedMethods.arrayToString(a));
+        System.out.println("  " + AssortedMethods.arrayToString(a));
     }
 }
