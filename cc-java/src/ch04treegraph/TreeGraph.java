@@ -48,7 +48,7 @@ package ch04treegraph;
  *                          #127. Two well-known algorithms can do this. What are the tradeoffs between them?
  */
 
-// Done 3 --> //TODO: isBST(), height()
+// Finished 3 --> //TODO: isBST(), height(), Complexity
 /**
  * 4.3 오름차순으로 정렬된 배열로부터 그 높이가 가장 낮은 이진 탐색 트리를 생성하는 알고리즘을 작성하라.
  *     배열 내 모든 원소는 배열 내에서 유일한 값을 갖는다.
@@ -74,7 +74,7 @@ package ch04treegraph;
  *                         Could you write the base case for the function? Great! Then that's basically the entire function.
  */
 
-// Done 4   --> //TODO: root --> depth 0 ? level 0 ? height 0?
+// Finished 4   --> //TODO: root --> depth 0 ? level 0 ? height 0?
 /**
  * 4.4 주어진 이진 트리에서 깊이별로 연결 리스트를 만들어 내는 알고리즘을 작성하라.
  *     (트리의 깊이가 D라면, 알고리즘 수행 결과로 D개의 연결 리스트가 만들어져야 한다.)
@@ -197,6 +197,7 @@ package ch04treegraph;
  *     어떤 경로의 값은 그 경로에 포함된 모든 노드의 값의 합이며, 경로는 트리 내의 아무 위치에서나 시작하고 끝날수 있다.
  */
 
+ 
 //--------------------------------------------------------------------------------
 // Completed 
 // --> KE(9개: 1, 3, 4, 8 - 2, 5, 6, 7, 9)
@@ -205,12 +206,18 @@ package ch04treegraph;
 //--------------------------------------------------------------------------------
 
 
-//--------------------------------------------------------------------------------
-// 연관된 다른 문제
-// 재귀와 동적 프로그래밍(9.7), 정렬과 탐색(10.8), 규모확장성과 메모리 제한(11.2, 11.5), 중간 난이도 연습문제(17.13, 17.14), 고난이도 연습문제(18.6, 18.8, 18.9, 18.10, 18.13)
-//
-// (6E)
-// Additional Questions: Recursion (#8.10), System Design and Scalability (#9.2, #9.3), Sorting and Searching
-// (#10.10), Hard Problems (#17.7, #17.12, #17.13, #17.14, #17.17, #17.20, #17.22, #17.25).
-//--------------------------------------------------------------------------------
+/*
+# Additional Questions
+  - 재귀와 동적 프로그래밍(9.7), 
+  - 정렬과 탐색(10.8), 
+  - 규모확장성과 메모리 제한(11.2, 11.5), 
+  - 중간 난이도 연습문제(17.13, 17.14), 
+  - 고난이도 연습문제(18.6, 18.8, 18.9, 18.10, 18.13)
+
+# 6E
+  - Recursion (#8.10), 
+  - System Design and Scalability (#9.2, #9.3), 
+  - Sorting and Searching (#10.10), 
+  - Hard Problems (#17.7, #17.12, #17.13, #17.14, #17.17, #17.20, #17.22, #17.25)
+*/
 public class TreeGraph {}

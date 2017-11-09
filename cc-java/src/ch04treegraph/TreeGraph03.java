@@ -28,23 +28,21 @@ import lib.TreeNode;
  */
 
 public class TreeGraph03 {
-    /**
-     * we need to match the number of nodes in the left subtree to the number of nodes in the right subtree as much as possible.
-     *  - we want the root to be the middle of the array.
-     *  - half the elements would be less than the root and half would be greater than it.
-     *
-     * The middle of each subsection of the array becomes the root of the node.
-     *  - The left half of the array will become our left subtree,
-     *  - and the right half of the array will become our right subtree.
-     *
-     * One way to implement this: root.insertNode(int v)
-     *  - inserts the value through a recursive process --> not so very efficiently.
-     *  - O(N logN) time
-     *
-     * Alternatively, createMinimalBST()
-     *  - a subsection of the array is passed.
-     *  - returns the root of a minimal tree for that array
-     */
+    /*
+    # Strategy
+      - we need to match the number of nodes in the left subtree to the number of nodes in the right subtree as much as possible
+      --> we want the root to be the middle of the array.
+      --> half the elements would be less than the root and half would be greater than it.
+    
+    # Alternatives
+      - root.insertNode(int v)
+        - Each insertion will require traversing the tree
+        --> not so very efficient
+        --> O(nlong(n)) time, O(1) space //TODO: Complexity
+      - createMinimalBST()
+        - a subsection of the array is passed
+        --> O(n) time, O(1) space //TODO: Complexity
+    */
 
     //--------------------------------------------------------------------------------
     // Solution
@@ -54,9 +52,11 @@ public class TreeGraph03 {
             return null;
         }
 
-        int mid = (start + end) / 2;    // median
+        // Median
+        int mid = (start + end) / 2;    // (start + end) >> 1
         TreeNode node = new TreeNode(array[mid]);
 
+        // Subtree
         node.left = createMinimalBST(array, start, mid - 1);
         node.right = createMinimalBST(array, mid + 1, end);
 

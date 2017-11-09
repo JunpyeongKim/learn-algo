@@ -15,5 +15,6 @@ package ch04treegraph;
  *                Hint #91.
  *
  */
+
 public class TreeGraph06TBD {
 }

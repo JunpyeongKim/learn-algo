@@ -27,18 +27,24 @@ import java.util.LinkedList;
  */
 
 public class TreeGraph04 {
-    /**
-     * at first glance, requires a level-by-level traversal. --> actually not necessary.
-     * ==> We can traverse the graph any way that we'd like.
-     *
-     * O(N) space: both solutions require returning O(N) data.
-     */
+    /*
+    # Strategy
+      - We can traverse the graph any way.
+      --> Either BFS or DFS
+    */
+
+    private enum DFS {
+        PREORDER,
+        INORDER,
+        POSTORDER
+    }
 
 
     //--------------------------------------------------------------------------------
-    // Solution #1. Breadth First Search (a.k.a Level-order traversal)
-    //              - O(N) time
-    //              - O(N) space
+    // Solution #1. Breadth-First Search (a.k.a Level-order traversal)
+    //              - Time Complexity: O(n)
+    //              - Space Complexity: O(n)
+    //                                  - returning O(n) data
     //--------------------------------------------------------------------------------
     public static ArrayList<LinkedList<TreeNode>> createLinkedListAtDepthByBFS(TreeNode root) {
         ArrayList<LinkedList<TreeNode>> result = new ArrayList<LinkedList<TreeNode>>();
@@ -53,9 +59,11 @@ public class TreeGraph04 {
 
             // Queue 대신 이미 존재하는 Depth별 LinkedList 를 사용하면 된다.
             while (current.size() > 0) {
-                result.add(current);    // Add previous depth
+                // Add current depth
+                result.add(current);
 
-                LinkedList<TreeNode> parents = current; // Go to next depth
+                // Go to next depth
+                LinkedList<TreeNode> parents = current; 
                 current = new LinkedList<TreeNode>();
 
                 // Visit the children: left to right
@@ -76,14 +84,16 @@ public class TreeGraph04 {
 
 
     //--------------------------------------------------------------------------------
-    // Solution #2. Depth First Search (a.k.a pre-order traversal; DLR) --> "Recurse"
-    //              - O(N) time
-    //              - O(N) space: recursive calls (in a balanced tree) --> O(logN)
-    //                            ==>> dwarfed by the O(N) data that must be returned.
+    // Solution #2. Depth-First Search
+    //              - Time Complexity: O(n)
+    //              - Space Complexity: O(n + log(n)) --> O(n) where dwarfed by the O(n)
+    //                                  - O(n) : returning O(n) data
+    //                                  - O(log(n)) : recursive calls (in a balanced tree)
     //--------------------------------------------------------------------------------
     private static void createLinkedListAtDepthByDFS(TreeNode node,
-                                                 int level,
-                                                 ArrayList<LinkedList<TreeNode>> result) {
+                                                     DFS dfs,
+                                                     int level,
+                                                     ArrayList<LinkedList<TreeNode>> result) {
         if (node == null) {
             return;
         }
@@ -99,17 +109,18 @@ public class TreeGraph04 {
             current = result.get(level);
         }
 
-        // Pre-order traversal
-        current.add(node);
-        createLinkedListAtDepthByDFS(node.left, level + 1, result);
-        createLinkedListAtDepthByDFS(node.right, level + 1, result);
+        if (DFS.PREORDER.equals(dfs)) current.add(node);
+        createLinkedListAtDepthByDFS(node.left, dfs, level + 1, result);
+        if (DFS.INORDER.equals(dfs)) current.add(node);
+        createLinkedListAtDepthByDFS(node.right, dfs, level + 1, result);
+        if (DFS.POSTORDER.equals(dfs)) current.add(node);
     }
 
-    public static ArrayList<LinkedList<TreeNode>> createLinkedListAtDepthByDFS(TreeNode root) {
+    public static ArrayList<LinkedList<TreeNode>> createLinkedListAtDepthByDFS(TreeNode root, DFS dfs) {
         ArrayList<LinkedList<TreeNode>> result = new ArrayList<LinkedList<TreeNode>>();
 
         if (root != null) {
-            createLinkedListAtDepthByDFS(root, 0, result);
+            createLinkedListAtDepthByDFS(root, dfs, 0, result);
         }
 
         return result;
@@ -117,12 +128,12 @@ public class TreeGraph04 {
 
 
     //--------------------------------------------------------------------------------
-    // Main
+    // Utility
     //--------------------------------------------------------------------------------
-    private static void printResult(ArrayList<LinkedList<TreeNode>> result, String search) {
+    private static void printResult(String approach, ArrayList<LinkedList<TreeNode>> result) {
         int level = 0;
 
-        System.out.println(search + " Approach:");
+        System.out.println("\n" + approach + ":");
         for (LinkedList<TreeNode> list : result) {
             System.out.print("---> Linked list at depth " + (level + 1) + ":"); //TODO: root --> depth 0 ? level 0 ? height 0?
 
@@ -142,6 +153,10 @@ public class TreeGraph04 {
         }
     }
 
+
+    //--------------------------------------------------------------------------------
+    // Main
+    //--------------------------------------------------------------------------------
     public static void main(String[] args) {
         int[] nodes_flattened = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ArrayList<LinkedList<TreeNode>> list;
@@ -150,11 +165,21 @@ public class TreeGraph04 {
         // BFS
         root = AssortedMethods.createTreeFromArray(nodes_flattened);
         list = createLinkedListAtDepthByBFS(root);
-        printResult(list, "BFS");
+        printResult("Breadth-First Search", list);
 
-        // DFS
+        // DFS: Pre-order Traversal
         root = AssortedMethods.createTreeFromArray(nodes_flattened);
-        list = createLinkedListAtDepthByDFS(root);
-        printResult(list, "DFS");
+        list = createLinkedListAtDepthByDFS(root, DFS.PREORDER);
+        printResult("Depth-First Search (Pre-order)", list);
+
+        // DFS: Post-order Traversal
+        root = AssortedMethods.createTreeFromArray(nodes_flattened);
+        list = createLinkedListAtDepthByDFS(root, DFS.INORDER);
+        printResult("Depth-First Search (In-order)", list);
+
+        // DFS: In-order Traversal
+        root = AssortedMethods.createTreeFromArray(nodes_flattened);
+        list = createLinkedListAtDepthByDFS(root, DFS.POSTORDER);
+        printResult("Depth-First Search (Post-order)", list);
     }
 }
